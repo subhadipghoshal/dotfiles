@@ -1,0 +1,67 @@
+
+alias cat=bat
+alias ls="eza --icons=always"
+alias v=vim
+alias vim=nvim
+
+alias krr="kubectl rollout restart"
+
+alias dot='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+
+
+
+safe_clean() {
+  set -euo pipefail
+
+  MODE="${1:-dry}"
+
+  SAFE_PATHS=(
+    "$HOME/Library/Caches"
+    "$HOME/Library/Logs"
+    /private/var/folders
+    /tmp
+  )
+
+  echo "🔍 Safe Temp Cleanup Utility (macOS)"
+  echo "-----------------------------------"
+  echo "Mode: $MODE"
+  echo
+
+  for path in "${SAFE_PATHS[@]}"; do
+    if [ ! -d "$path" ]; then
+      echo "⚠️  Skipping missing: $path"
+      continue
+    fi
+
+    echo "📂 Target: $path"
+
+    if [ "$MODE" = "dry" ]; then
+      echo "→ Dry run preview:"
+      du -sh "$path"/* 2>/dev/null | sort -h | tail -10
+      echo
+    elif [ "$MODE" = "trash" ]; then
+      echo "→ Moving contents to Trash..."
+      mv "$path"/* ~/.Trash/ 2>/dev/null || true
+      echo "✔ Trashed $path"
+    elif [ "$MODE" = "delete" ]; then
+      echo "🚨 PERMANENT DELETE MODE 🚨"
+      read -p "Type DELETE to confirm: " confirm
+      if [ "$confirm" = "DELETE" ]; then
+        rm -rf "$path"/*
+        echo "✔ Permanently deleted $path"
+      else
+        echo "❌ Skipped $path"
+      fi
+    else
+      echo "❌ Unknown mode: $MODE"
+      return 1
+    fi
+
+    echo
+  done
+
+  echo "✅ Cleanup complete."
+}
+
+
+alias tempclean='safe_clean trash'

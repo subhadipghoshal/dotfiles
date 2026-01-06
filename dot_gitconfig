@@ -1,0 +1,16 @@
+[init]
+	defaultBranch = main
+[core]
+	pager = delta
+[delta]
+    side-by-side = true
+    line-numbers = true
+    navigate = true
+
+[interactive]
+	diffFilter = delta --color-only --side-by-side
+[user]
+	name = Subhadip Ghoshal
+	email = sghoshal.tech@gmail.com
+[pull]
+	rebase = true
