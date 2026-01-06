@@ -1,0 +1,44 @@
+
+
+# custom cat
+#
+# cat file and copy
+copycat() {
+  if [ -z "$1" ]; then
+    echo "usage: copycat <file_name>"
+    return 1
+  fi
+
+  /opt/homebrew/bin/bat --style=plain "$1" | pbcopy
+  /opt/homebrew/bin/bat "$1"
+}
+
+# cat file with bat syntax highlighting and plain style
+
+pcat() {
+  if [ -z "$1" ]; then
+    echo "usage: copycat <file_name>"
+    return 1
+  fi
+
+  /opt/homebrew/bin/bat --style=plain "$1"
+}
+
+# cat json files with formatting
+jsoncat() {
+  if [[ -z "$@" ]]; then
+    # if no arguments are provided, read from standard input
+    /opt/homebrew/bin/bat | /opt/homebrew/bin/bat -l json
+  else
+    for arg in "$@"; do
+      if [[ -f "$arg" && "$arg" == *.json ]]; then
+        # if the argument is a json file, cat the file and pipe through cat -l json
+        /opt/homebrew/bin/bat  "$arg" | /opt/homebrew/bin/bat  -l json
+      else
+        # if the argument is not a json file, assume it's a command and execute it, then pipe the output through cat -l json
+        eval "$arg" | /opt/homebrew/bin/bat  -l json
+      fi
+    done
+  fi
+}
+

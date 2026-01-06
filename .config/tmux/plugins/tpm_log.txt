@@ -1,0 +1,777 @@
+[2025-12-20 03:08:29.764]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-cpu tmux-plugins/tmux-resurrect tmux-plugins/tmux-continuum
+[2025-12-20 03:08:29.772]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-20 03:08:30.778]	Installing "tmux-cpu"
+[2025-12-20 03:08:30.790]	Installing "tmux-resurrect"
+[2025-12-20 03:08:30.801]	Installing "tmux-copycat"
+[2025-12-20 03:08:30.810]	Installing "tmux-continuum"
+[2025-12-20 03:08:32.445]	  "tmux-copycat" download success
+[2025-12-20 03:08:32.453]	  "tmux-continuum" download success
+[2025-12-20 03:08:32.461]	  "tmux-cpu" download success
+[2025-12-20 03:08:33.428]	  "tmux-resurrect" download success
+[2025-12-20 03:08:33.487]	Done.
+
+[2025-12-20 03:11:02.096]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-cpu tmux-plugins/tmux-resurrect tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator
+[2025-12-20 03:11:02.104]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-20 03:11:02.317]	Installing "vim-tmux-navigator"
+[2025-12-20 03:11:02.326]	Already installed "tmux-cpu"
+[2025-12-20 03:11:02.334]	Already installed "tmux-resurrect"
+[2025-12-20 03:11:02.342]	Already installed "tmux-copycat"
+[2025-12-20 03:11:02.350]	Already installed "tmux-continuum"
+[2025-12-20 03:11:03.352]	  "vim-tmux-navigator" download success
+[2025-12-20 03:11:03.360]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-20 03:11:04.424]	Updating all plugins!
+[2025-12-20 03:11:04.435]	
+[2025-12-20 03:11:05.281]	  "tmux-cpu" update success
+[2025-12-20 03:11:05.289]	  "vim-tmux-navigator" update success
+[2025-12-20 03:11:05.297]	  "tmux-copycat" update success
+[2025-12-20 03:11:05.304]	    | Already up to date.
+[2025-12-20 03:11:05.311]	    | Already up to date.
+[2025-12-20 03:11:05.318]	    | Already up to date.
+[2025-12-20 03:11:05.325]	  "tmux-resurrect" update success
+[2025-12-20 03:11:05.333]	  "tmux-continuum" update success
+[2025-12-20 03:11:05.340]	    | Already up to date.
+[2025-12-20 03:11:05.347]	    | Already up to date.
+[2025-12-20 03:11:05.355]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-20 03:11:06.539]	Done.
+
+[2025-12-21 12:27:27.789]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-cpu tmux-plugins/tmux-resurrect tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator
+[2025-12-21 12:27:27.799]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-21 12:27:28.430]	Already installed "tmux-continuum"
+[2025-12-21 12:27:28.438]	Already installed "tmux-copycat"
+[2025-12-21 12:27:28.446]	Already installed "tmux-cpu"
+[2025-12-21 12:27:28.454]	Already installed "vim-tmux-navigator"
+[2025-12-21 12:27:28.462]	Already installed "tmux-resurrect"
+[2025-12-21 12:27:28.472]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-21 12:27:29.048]	Updating all plugins!
+[2025-12-21 12:27:29.059]	
+[2025-12-21 12:27:29.862]	  "tmux-copycat" update success
+[2025-12-21 12:27:29.871]	  "vim-tmux-navigator" update success
+[2025-12-21 12:27:29.880]	    | Already up to date.
+[2025-12-21 12:27:29.888]	    | Already up to date.
+[2025-12-21 12:27:29.897]	  "tmux-cpu" update success
+[2025-12-21 12:27:29.905]	    | Already up to date.
+[2025-12-21 12:27:29.913]	  "tmux-resurrect" update success
+[2025-12-21 12:27:29.920]	    | Already up to date.
+[2025-12-21 12:27:29.927]	  "tmux-continuum" update success
+[2025-12-21 12:27:29.934]	    | Already up to date.
+[2025-12-21 12:27:29.942]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-21 12:27:30.050]	Done.
+
+[2025-12-22 22:46:38.901]	List of discovered tpm plugins: tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator tmux-plugins/tmux-sensible
+[2025-12-22 22:46:38.910]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-22 22:46:40.417]	Installing "tmux-sensible"
+[2025-12-22 22:46:40.426]	Already installed "vim-tmux-navigator"
+[2025-12-22 22:46:40.435]	Already installed "tmux-continuum"
+[2025-12-22 22:46:41.466]	  "tmux-sensible" download success
+[2025-12-22 22:46:41.475]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-22 22:46:42.314]	Updating all plugins!
+[2025-12-22 22:46:42.325]	
+[2025-12-22 22:46:43.088]	  "vim-tmux-navigator" update success
+[2025-12-22 22:46:43.096]	    | Already up to date.
+[2025-12-22 22:46:43.104]	  "tmux-continuum" update success
+[2025-12-22 22:46:43.111]	    | Already up to date.
+[2025-12-22 22:46:43.118]	  "tmux-sensible" update success
+[2025-12-22 22:46:43.125]	    | Already up to date.
+[2025-12-22 22:46:43.133]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-22 22:46:43.179]	Removing "tmux-copycat"
+[2025-12-22 22:46:43.191]	  "tmux-copycat" clean success
+[2025-12-22 22:46:43.199]	Removing "tmux-cpu"
+[2025-12-22 22:46:43.207]	  "tmux-cpu" clean success
+[2025-12-22 22:46:43.215]	Removing "tmux-resurrect"
+[2025-12-22 22:46:43.223]	  "tmux-resurrect" clean success
+[2025-12-22 22:46:43.278]	Done.
+
+[2025-12-22 22:50:18.065]	List of discovered tpm plugins: tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator tmux-plugins/tmux-sensible
+[2025-12-22 22:50:18.074]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-22 22:50:18.302]	Already installed "tmux-continuum"
+[2025-12-22 22:50:18.310]	Already installed "tmux-sensible"
+[2025-12-22 22:50:18.318]	Already installed "vim-tmux-navigator"
+[2025-12-22 22:50:18.327]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-22 22:50:18.491]	Updating all plugins!
+[2025-12-22 22:50:18.500]	
+[2025-12-22 22:50:19.283]	  "tmux-continuum" update success
+[2025-12-22 22:50:19.291]	  "vim-tmux-navigator" update success
+[2025-12-22 22:50:19.298]	    | Already up to date.
+[2025-12-22 22:50:19.306]	    | Already up to date.
+[2025-12-22 22:50:19.313]	  "tmux-sensible" update success
+[2025-12-22 22:50:19.320]	    | Already up to date.
+[2025-12-22 22:50:19.328]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-22 22:50:19.421]	Done.
+
+[2025-12-22 23:05:56.302]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator "catppuccin/tmux#v2.1.3"
+[2025-12-22 23:05:56.312]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-22 23:05:57.235]	Installing "tmux-copycat"
+[2025-12-22 23:05:57.244]	Installing "tmux"
+[2025-12-22 23:05:57.253]	Already installed "vim-tmux-navigator"
+[2025-12-22 23:05:57.261]	Already installed "tmux-continuum"
+[2025-12-22 23:05:57.596]	  "tmux" download fail
+[2025-12-22 23:05:58.374]	  "tmux-copycat" download success
+[2025-12-22 23:05:58.382]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-22 23:05:59.363]	Updating all plugins!
+[2025-12-22 23:05:59.374]	
+[2025-12-22 23:06:00.135]	  "tmux-copycat" update success
+[2025-12-22 23:06:00.143]	    | Already up to date.
+[2025-12-22 23:06:00.151]	  "vim-tmux-navigator" update success
+[2025-12-22 23:06:00.159]	    | Already up to date.
+[2025-12-22 23:06:00.166]	  "tmux-continuum" update success
+[2025-12-22 23:06:00.173]	    | Already up to date.
+[2025-12-22 23:06:00.181]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-22 23:06:00.223]	Removing "tmux-sensible"
+[2025-12-22 23:06:00.231]	  "tmux-sensible" clean success
+[2025-12-22 23:06:00.286]	Done.
+
+[2025-12-22 23:06:04.998]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator "catppuccin/tmux#v2.1.3"
+[2025-12-22 23:06:05.012]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-22 23:06:05.198]	Installing "tmux"
+[2025-12-22 23:06:05.206]	Already installed "tmux-continuum"
+[2025-12-22 23:06:05.214]	Already installed "tmux-copycat"
+[2025-12-22 23:06:05.222]	Already installed "vim-tmux-navigator"
+[2025-12-22 23:06:05.577]	  "tmux" download fail
+[2025-12-22 23:06:05.594]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-22 23:06:05.815]	Updating all plugins!
+[2025-12-22 23:06:05.826]	
+[2025-12-22 23:06:06.648]	  "tmux-continuum" update success
+[2025-12-22 23:06:06.655]	    | Already up to date.
+[2025-12-22 23:06:06.662]	  "tmux-copycat" update success
+[2025-12-22 23:06:06.670]	    | Already up to date.
+[2025-12-22 23:06:06.813]	  "vim-tmux-navigator" update success
+[2025-12-22 23:06:06.820]	    | Already up to date.
+[2025-12-22 23:06:06.828]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-22 23:06:06.919]	Done.
+
+[2025-12-22 23:07:19.801]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator "catppuccin/tmux#v2.1.3"
+[2025-12-22 23:07:19.811]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-22 23:07:20.033]	Installing "tmux"
+[2025-12-22 23:07:20.042]	Already installed "tmux-continuum"
+[2025-12-22 23:07:20.051]	Already installed "tmux-copycat"
+[2025-12-22 23:07:20.059]	Already installed "vim-tmux-navigator"
+[2025-12-22 23:07:20.384]	  "tmux" download fail
+[2025-12-22 23:07:20.395]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-22 23:07:20.598]	Updating all plugins!
+[2025-12-22 23:07:20.609]	
+[2025-12-22 23:07:21.388]	  "vim-tmux-navigator" update success
+[2025-12-22 23:07:21.396]	    | Already up to date.
+[2025-12-22 23:07:21.403]	  "tmux-continuum" update success
+[2025-12-22 23:07:21.411]	    | Already up to date.
+[2025-12-22 23:07:21.418]	  "tmux-copycat" update success
+[2025-12-22 23:07:21.425]	    | Already up to date.
+[2025-12-22 23:07:21.433]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-22 23:07:21.525]	Done.
+
+[2025-12-22 23:07:33.835]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator "catppuccin/tmux#v2.1.3"
+[2025-12-22 23:07:33.845]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-22 23:07:34.065]	Installing "tmux"
+[2025-12-22 23:07:34.074]	Already installed "tmux-continuum"
+[2025-12-22 23:07:34.083]	Already installed "tmux-copycat"
+[2025-12-22 23:07:34.091]	Already installed "vim-tmux-navigator"
+[2025-12-22 23:07:35.440]	  "tmux" download fail
+[2025-12-22 23:07:35.456]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-22 23:07:35.675]	Updating all plugins!
+[2025-12-22 23:07:35.685]	
+[2025-12-22 23:07:36.468]	  "tmux-continuum" update success
+[2025-12-22 23:07:36.476]	    | Already up to date.
+[2025-12-22 23:07:36.483]	  "tmux-copycat" update success
+[2025-12-22 23:07:36.490]	    | Already up to date.
+[2025-12-22 23:07:36.497]	  "vim-tmux-navigator" update success
+[2025-12-22 23:07:36.505]	    | Already up to date.
+[2025-12-22 23:07:36.513]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-22 23:07:36.606]	Done.
+
+[2025-12-22 23:10:35.982]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator "catppuccin/tmux#v2.1.3"
+[2025-12-22 23:10:35.991]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-22 23:10:36.211]	Installing "tmux"
+[2025-12-22 23:10:36.228]	Already installed "tmux-copycat"
+[2025-12-22 23:10:36.243]	Already installed "vim-tmux-navigator"
+[2025-12-22 23:10:36.255]	Already installed "tmux-continuum"
+[2025-12-22 23:10:36.598]	  "tmux" download fail
+[2025-12-22 23:10:36.613]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-22 23:10:36.837]	Updating all plugins!
+[2025-12-22 23:10:36.849]	
+[2025-12-22 23:10:37.760]	  "tmux-copycat" update success
+[2025-12-22 23:10:37.769]	    | Already up to date.
+[2025-12-22 23:10:37.777]	  "tmux-continuum" update success
+[2025-12-22 23:10:37.785]	    | Already up to date.
+[2025-12-22 23:10:37.793]	  "vim-tmux-navigator" update success
+[2025-12-22 23:10:37.802]	    | Already up to date.
+[2025-12-22 23:10:37.811]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-22 23:10:37.908]	Done.
+
+[2025-12-22 23:12:01.172]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator "catppuccin/tmux#v2.1.3"
+[2025-12-22 23:12:01.187]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-22 23:12:03.008]	Installing "tmux"
+[2025-12-22 23:12:03.017]	Already installed "tmux-continuum"
+[2025-12-22 23:12:03.025]	Already installed "tmux-copycat"
+[2025-12-22 23:12:03.033]	Already installed "vim-tmux-navigator"
+[2025-12-22 23:12:03.381]	  "tmux" download fail
+[2025-12-22 23:12:03.396]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-22 23:12:04.426]	Updating all plugins!
+[2025-12-22 23:12:04.437]	
+[2025-12-22 23:12:05.247]	  "vim-tmux-navigator" update success
+[2025-12-22 23:12:05.255]	  "tmux-continuum" update success
+[2025-12-22 23:12:05.263]	    | Already up to date.
+[2025-12-22 23:12:05.271]	    | Already up to date.
+[2025-12-22 23:12:05.278]	  "tmux-copycat" update success
+[2025-12-22 23:12:05.286]	    | Already up to date.
+[2025-12-22 23:12:05.294]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-22 23:12:05.386]	Done.
+
+[2025-12-22 23:12:51.984]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator "catppuccin/tmux#v2.1.3"
+[2025-12-22 23:12:51.993]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-22 23:12:52.247]	Installing "tmux"
+[2025-12-22 23:12:52.255]	Already installed "tmux-continuum"
+[2025-12-22 23:12:52.264]	Already installed "tmux-copycat"
+[2025-12-22 23:12:52.272]	Already installed "vim-tmux-navigator"
+[2025-12-22 23:12:52.605]	  "tmux" download fail
+[2025-12-22 23:12:52.616]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-22 23:12:52.818]	Updating all plugins!
+[2025-12-22 23:12:52.829]	
+[2025-12-22 23:12:53.606]	  "tmux-continuum" update success
+[2025-12-22 23:12:53.615]	    | Already up to date.
+[2025-12-22 23:12:53.623]	  "tmux-copycat" update success
+[2025-12-22 23:12:53.631]	    | Already up to date.
+[2025-12-22 23:12:53.642]	  "vim-tmux-navigator" update success
+[2025-12-22 23:12:53.650]	    | Already up to date.
+[2025-12-22 23:12:53.658]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-22 23:12:53.749]	Done.
+
+[2025-12-22 23:34:53.233]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator "catppuccin/tmux#v2.1.3"
+[2025-12-22 23:34:53.242]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-22 23:34:54.185]	Installing "tmux"
+[2025-12-22 23:34:54.194]	Already installed "vim-tmux-navigator"
+[2025-12-22 23:34:54.203]	Already installed "tmux-copycat"
+[2025-12-22 23:34:54.211]	Already installed "tmux-continuum"
+[2025-12-22 23:34:54.578]	  "tmux" download fail
+[2025-12-22 23:34:54.595]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-22 23:34:55.550]	Updating all plugins!
+[2025-12-22 23:34:55.561]	
+[2025-12-22 23:34:57.055]	  "vim-tmux-navigator" update success
+[2025-12-22 23:34:57.062]	  "tmux-copycat" update success
+[2025-12-22 23:34:57.069]	  "tmux-continuum" update success
+[2025-12-22 23:34:57.076]	    | Already up to date.
+[2025-12-22 23:34:57.083]	    | Already up to date.
+[2025-12-22 23:34:57.090]	    | Already up to date.
+[2025-12-22 23:34:57.098]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-22 23:34:57.191]	Done.
+
+[2025-12-22 23:42:36.754]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator catppuccin/tmux
+[2025-12-22 23:42:36.763]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-22 23:42:37.711]	Installing "tmux"
+[2025-12-22 23:42:37.720]	Already installed "tmux-copycat"
+[2025-12-22 23:42:37.729]	Already installed "vim-tmux-navigator"
+[2025-12-22 23:42:37.737]	Already installed "tmux-continuum"
+[2025-12-22 23:42:38.949]	  "tmux" download success
+[2025-12-22 23:42:38.957]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-22 23:42:39.825]	Updating all plugins!
+[2025-12-22 23:42:39.836]	
+[2025-12-22 23:42:40.601]	  "tmux-copycat" update success
+[2025-12-22 23:42:40.610]	    | Already up to date.
+[2025-12-22 23:42:40.617]	  "vim-tmux-navigator" update success
+[2025-12-22 23:42:40.625]	    | Already up to date.
+[2025-12-22 23:42:40.633]	  "tmux" update success
+[2025-12-22 23:42:40.640]	    | Already up to date.
+[2025-12-22 23:42:40.647]	  "tmux-continuum" update success
+[2025-12-22 23:42:40.654]	    | Already up to date.
+[2025-12-22 23:42:40.663]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-22 23:42:40.756]	Done.
+
+[2025-12-22 23:44:50.768]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator catppuccin/tmux
+[2025-12-22 23:44:50.777]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-22 23:44:51.007]	Already installed "tmux-copycat"
+[2025-12-22 23:44:51.016]	Already installed "vim-tmux-navigator"
+[2025-12-22 23:44:51.024]	Already installed "tmux-continuum"
+[2025-12-22 23:44:51.032]	Already installed "tmux"
+[2025-12-22 23:44:51.040]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-22 23:44:51.193]	Updating all plugins!
+[2025-12-22 23:44:51.201]	
+[2025-12-22 23:44:51.983]	  "tmux-copycat" update success
+[2025-12-22 23:44:51.991]	    | Already up to date.
+[2025-12-22 23:44:51.999]	  "vim-tmux-navigator" update success
+[2025-12-22 23:44:52.007]	    | Already up to date.
+[2025-12-22 23:44:52.014]	  "tmux" update success
+[2025-12-22 23:44:52.022]	    | Already up to date.
+[2025-12-22 23:44:52.029]	  "tmux-continuum" update success
+[2025-12-22 23:44:52.036]	    | Already up to date.
+[2025-12-22 23:44:52.044]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-22 23:44:52.139]	Done.
+
+[2025-12-22 23:58:02.753]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator catppuccin/tmux
+[2025-12-22 23:58:02.765]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-22 23:58:03.697]	Already installed "tmux-continuum"
+[2025-12-22 23:58:03.704]	Already installed "vim-tmux-navigator"
+[2025-12-22 23:58:03.711]	Already installed "tmux"
+[2025-12-22 23:58:03.720]	Already installed "tmux-copycat"
+[2025-12-22 23:58:03.728]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-22 23:58:04.501]	Updating all plugins!
+[2025-12-22 23:58:04.511]	
+[2025-12-22 23:58:05.300]	  "tmux-copycat" update success
+[2025-12-22 23:58:05.308]	    | Already up to date.
+[2025-12-22 23:58:05.316]	  "tmux-continuum" update success
+[2025-12-22 23:58:05.324]	    | Already up to date.
+[2025-12-22 23:58:05.331]	  "vim-tmux-navigator" update success
+[2025-12-22 23:58:05.338]	    | Already up to date.
+[2025-12-22 23:58:05.345]	  "tmux" update success
+[2025-12-22 23:58:05.352]	    | Already up to date.
+[2025-12-22 23:58:05.360]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-22 23:58:05.455]	Done.
+
+[2025-12-22 23:58:14.083]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator catppuccin/tmux
+[2025-12-22 23:58:14.092]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-22 23:58:14.319]	Already installed "tmux-continuum"
+[2025-12-22 23:58:14.328]	Already installed "vim-tmux-navigator"
+[2025-12-22 23:58:14.336]	Already installed "tmux-copycat"
+[2025-12-22 23:58:14.344]	Already installed "tmux"
+[2025-12-22 23:58:14.352]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-22 23:58:14.507]	Updating all plugins!
+[2025-12-22 23:58:14.515]	
+[2025-12-22 23:58:15.277]	  "tmux-continuum" update success
+[2025-12-22 23:58:15.286]	    | Already up to date.
+[2025-12-22 23:58:15.295]	  "tmux-copycat" update success
+[2025-12-22 23:58:15.302]	    | Already up to date.
+[2025-12-22 23:58:15.310]	  "vim-tmux-navigator" update success
+[2025-12-22 23:58:15.318]	    | Already up to date.
+[2025-12-22 23:58:15.325]	  "tmux" update success
+[2025-12-22 23:58:15.332]	    | Already up to date.
+[2025-12-22 23:58:15.340]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-22 23:58:15.431]	Done.
+
+[2025-12-22 23:58:38.192]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator catppuccin/tmux
+[2025-12-22 23:58:38.201]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-22 23:58:38.428]	Already installed "tmux-copycat"
+[2025-12-22 23:58:38.437]	Already installed "tmux-continuum"
+[2025-12-22 23:58:38.445]	Already installed "vim-tmux-navigator"
+[2025-12-22 23:58:38.453]	Already installed "tmux"
+[2025-12-22 23:58:38.461]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-22 23:58:38.634]	Updating all plugins!
+[2025-12-22 23:58:38.643]	
+[2025-12-22 23:58:39.449]	  "tmux" update success
+[2025-12-22 23:58:39.457]	    | Already up to date.
+[2025-12-22 23:58:39.466]	  "tmux-copycat" update success
+[2025-12-22 23:58:39.473]	    | Already up to date.
+[2025-12-22 23:58:39.481]	  "vim-tmux-navigator" update success
+[2025-12-22 23:58:39.488]	    | Already up to date.
+[2025-12-22 23:58:39.496]	  "tmux-continuum" update success
+[2025-12-22 23:58:39.503]	    | Already up to date.
+[2025-12-22 23:58:39.511]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-22 23:58:39.604]	Done.
+
+[2025-12-23 00:01:19.002]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator catppuccin/tmux
+[2025-12-23 00:01:19.012]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-23 00:01:19.196]	Already installed "vim-tmux-navigator"
+[2025-12-23 00:01:19.203]	Already installed "tmux"
+[2025-12-23 00:01:19.210]	Already installed "tmux-copycat"
+[2025-12-23 00:01:19.218]	Already installed "tmux-continuum"
+[2025-12-23 00:01:19.225]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-23 00:01:19.391]	Updating all plugins!
+[2025-12-23 00:01:19.401]	
+[2025-12-23 00:01:20.183]	  "tmux-copycat" update success
+[2025-12-23 00:01:20.191]	    | Already up to date.
+[2025-12-23 00:01:20.200]	  "tmux-continuum" update success
+[2025-12-23 00:01:20.207]	    | Already up to date.
+[2025-12-23 00:01:20.215]	  "tmux" update success
+[2025-12-23 00:01:20.223]	    | Already up to date.
+[2025-12-23 00:01:20.230]	  "vim-tmux-navigator" update success
+[2025-12-23 00:01:20.237]	    | Already up to date.
+[2025-12-23 00:01:20.245]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-23 00:01:20.339]	Done.
+
+[2025-12-23 00:01:37.946]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator catppuccin/tmux
+[2025-12-23 00:01:37.955]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-23 00:01:38.184]	Already installed "tmux"
+[2025-12-23 00:01:38.192]	Already installed "vim-tmux-navigator"
+[2025-12-23 00:01:38.200]	Already installed "tmux-continuum"
+[2025-12-23 00:01:38.208]	Already installed "tmux-copycat"
+[2025-12-23 00:01:38.217]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-23 00:01:38.384]	Updating all plugins!
+[2025-12-23 00:01:38.393]	
+[2025-12-23 00:01:39.181]	  "tmux-copycat" update success
+[2025-12-23 00:01:39.190]	    | Already up to date.
+[2025-12-23 00:01:39.197]	  "tmux-continuum" update success
+[2025-12-23 00:01:39.205]	    | Already up to date.
+[2025-12-23 00:01:39.213]	  "vim-tmux-navigator" update success
+[2025-12-23 00:01:39.220]	    | Already up to date.
+[2025-12-23 00:01:39.228]	  "tmux" update success
+[2025-12-23 00:01:39.235]	    | Already up to date.
+[2025-12-23 00:01:39.243]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-23 00:01:39.337]	Done.
+
+[2025-12-23 00:02:30.885]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator catppuccin/tmux
+[2025-12-23 00:02:30.894]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-23 00:02:31.109]	Already installed "tmux-continuum"
+[2025-12-23 00:02:31.118]	Already installed "tmux-copycat"
+[2025-12-23 00:02:31.126]	Already installed "vim-tmux-navigator"
+[2025-12-23 00:02:31.134]	Already installed "tmux"
+[2025-12-23 00:02:31.142]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-23 00:02:31.293]	Updating all plugins!
+[2025-12-23 00:02:31.301]	
+[2025-12-23 00:02:32.063]	  "tmux-copycat" update success
+[2025-12-23 00:02:32.072]	    | Already up to date.
+[2025-12-23 00:02:32.080]	  "tmux-continuum" update success
+[2025-12-23 00:02:32.088]	    | Already up to date.
+[2025-12-23 00:02:32.095]	  "vim-tmux-navigator" update success
+[2025-12-23 00:02:32.102]	    | Already up to date.
+[2025-12-23 00:02:32.109]	  "tmux" update success
+[2025-12-23 00:02:32.117]	    | Already up to date.
+[2025-12-23 00:02:32.125]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-23 00:02:32.219]	Done.
+
+[2025-12-23 00:05:01.565]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator "catppuccin/tmux#v2.1.3"
+[2025-12-23 00:05:01.576]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-23 00:05:02.551]	Already installed "vim-tmux-navigator"
+[2025-12-23 00:05:02.561]	Already installed "tmux-continuum"
+[2025-12-23 00:05:02.570]	Already installed "tmux"
+[2025-12-23 00:05:02.584]	Already installed "tmux-copycat"
+[2025-12-23 00:05:02.596]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-23 00:05:03.632]	Updating all plugins!
+[2025-12-23 00:05:03.642]	
+[2025-12-23 00:05:04.403]	  "vim-tmux-navigator" update success
+[2025-12-23 00:05:04.412]	    | Already up to date.
+[2025-12-23 00:05:04.419]	  "tmux-copycat" update success
+[2025-12-23 00:05:04.426]	    | Already up to date.
+[2025-12-23 00:05:04.434]	  "tmux" update success
+[2025-12-23 00:05:04.441]	    | Already up to date.
+[2025-12-23 00:05:04.448]	  "tmux-continuum" update success
+[2025-12-23 00:05:04.455]	    | Already up to date.
+[2025-12-23 00:05:04.463]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-23 00:05:04.556]	Done.
+
+[2025-12-23 00:05:15.073]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator "catppuccin/tmux#v2.1.3"
+[2025-12-23 00:05:15.082]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-23 00:05:15.318]	Already installed "tmux-copycat"
+[2025-12-23 00:05:15.326]	Already installed "tmux-continuum"
+[2025-12-23 00:05:15.334]	Already installed "vim-tmux-navigator"
+[2025-12-23 00:05:15.342]	Already installed "tmux"
+[2025-12-23 00:05:15.351]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-23 00:05:15.487]	Updating all plugins!
+[2025-12-23 00:05:15.495]	
+[2025-12-23 00:05:16.391]	  "tmux-copycat" update success
+[2025-12-23 00:05:16.400]	    | Already up to date.
+[2025-12-23 00:05:16.408]	  "tmux" update success
+[2025-12-23 00:05:16.415]	    | Already up to date.
+[2025-12-23 00:05:16.423]	  "tmux-continuum" update success
+[2025-12-23 00:05:16.430]	    | Already up to date.
+[2025-12-23 00:05:16.437]	  "vim-tmux-navigator" update success
+[2025-12-23 00:05:16.444]	    | Already up to date.
+[2025-12-23 00:05:16.452]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-23 00:05:16.544]	Done.
+
+[2025-12-23 00:05:46.754]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator "catppuccin/tmux#v2.1.3"
+[2025-12-23 00:05:46.763]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-23 00:05:46.993]	Already installed "tmux"
+[2025-12-23 00:05:47.002]	Already installed "vim-tmux-navigator"
+[2025-12-23 00:05:47.010]	Already installed "tmux-continuum"
+[2025-12-23 00:05:47.018]	Already installed "tmux-copycat"
+[2025-12-23 00:05:47.026]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-23 00:05:47.165]	Updating all plugins!
+[2025-12-23 00:05:47.174]	
+[2025-12-23 00:05:48.167]	  "tmux-copycat" update success
+[2025-12-23 00:05:48.175]	    | Already up to date.
+[2025-12-23 00:05:48.183]	  "vim-tmux-navigator" update success
+[2025-12-23 00:05:48.191]	    | Already up to date.
+[2025-12-23 00:05:48.198]	  "tmux" update success
+[2025-12-23 00:05:48.205]	    | Already up to date.
+[2025-12-23 00:05:48.212]	  "tmux-continuum" update success
+[2025-12-23 00:05:48.219]	    | Already up to date.
+[2025-12-23 00:05:48.227]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-23 00:05:48.321]	Done.
+
+[2025-12-23 00:12:59.898]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator "catppuccin/tmux#v2.1.3"
+[2025-12-23 00:12:59.908]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-23 00:13:00.853]	Already installed "tmux-continuum"
+[2025-12-23 00:13:00.861]	Already installed "tmux-copycat"
+[2025-12-23 00:13:00.870]	Already installed "vim-tmux-navigator"
+[2025-12-23 00:13:00.877]	Already installed "tmux"
+[2025-12-23 00:13:00.886]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-23 00:13:01.757]	Updating all plugins!
+[2025-12-23 00:13:01.767]	
+[2025-12-23 00:13:02.609]	  "vim-tmux-navigator" update success
+[2025-12-23 00:13:02.624]	    | Already up to date.
+[2025-12-23 00:13:02.693]	  "tmux-continuum" update success
+[2025-12-23 00:13:02.704]	    | Already up to date.
+[2025-12-23 00:13:02.714]	  "tmux-copycat" update success
+[2025-12-23 00:13:02.725]	    | Already up to date.
+[2025-12-23 00:13:02.965]	  "tmux" update success
+[2025-12-23 00:13:02.975]	    | Already up to date.
+[2025-12-23 00:13:02.987]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-23 00:13:03.099]	Done.
+
+[2025-12-23 00:13:15.663]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator "catppuccin/tmux#v2.1.3"
+[2025-12-23 00:13:15.672]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-23 00:13:15.903]	Already installed "tmux-continuum"
+[2025-12-23 00:13:15.912]	Already installed "tmux-copycat"
+[2025-12-23 00:13:15.920]	Already installed "vim-tmux-navigator"
+[2025-12-23 00:13:15.928]	Already installed "tmux"
+[2025-12-23 00:13:15.936]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-23 00:13:16.089]	Updating all plugins!
+[2025-12-23 00:13:16.098]	
+[2025-12-23 00:13:16.882]	  "vim-tmux-navigator" update success
+[2025-12-23 00:13:16.890]	  "tmux-copycat" update success
+[2025-12-23 00:13:16.898]	    | Already up to date.
+[2025-12-23 00:13:16.906]	    | Already up to date.
+[2025-12-23 00:13:16.913]	  "tmux-continuum" update success
+[2025-12-23 00:13:16.920]	    | Already up to date.
+[2025-12-23 00:13:16.927]	  "tmux" update success
+[2025-12-23 00:13:16.934]	    | Already up to date.
+[2025-12-23 00:13:16.942]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-23 00:13:17.037]	Done.
+
+[2025-12-23 00:26:29.123]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator jimeh/tmux-themepack
+[2025-12-23 00:26:29.132]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-23 00:26:29.627]	Installing "tmux-themepack"
+[2025-12-23 00:26:29.635]	Already installed "tmux-copycat"
+[2025-12-23 00:26:29.644]	Already installed "tmux-continuum"
+[2025-12-23 00:26:29.651]	Already installed "vim-tmux-navigator"
+[2025-12-23 00:26:30.844]	  "tmux-themepack" download success
+[2025-12-23 00:26:30.852]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-23 00:26:31.354]	Updating all plugins!
+[2025-12-23 00:26:31.365]	
+[2025-12-23 00:26:32.116]	  "tmux-copycat" update success
+[2025-12-23 00:26:32.125]	    | Already up to date.
+[2025-12-23 00:26:32.133]	  "tmux-continuum" update success
+[2025-12-23 00:26:32.141]	    | Already up to date.
+[2025-12-23 00:26:32.148]	  "tmux-themepack" update success
+[2025-12-23 00:26:32.155]	    | Already up to date.
+[2025-12-23 00:26:32.163]	  "vim-tmux-navigator" update success
+[2025-12-23 00:26:32.170]	    | Already up to date.
+[2025-12-23 00:26:32.178]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-23 00:26:32.271]	Done.
+
+[2025-12-23 00:26:39.157]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator jimeh/tmux-themepack
+[2025-12-23 00:26:39.166]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-23 00:26:39.395]	Already installed "tmux-continuum"
+[2025-12-23 00:26:39.403]	Already installed "vim-tmux-navigator"
+[2025-12-23 00:26:39.411]	Already installed "tmux-themepack"
+[2025-12-23 00:26:39.419]	Already installed "tmux-copycat"
+[2025-12-23 00:26:39.428]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-23 00:26:39.595]	Updating all plugins!
+[2025-12-23 00:26:39.605]	
+[2025-12-23 00:26:40.396]	  "vim-tmux-navigator" update success
+[2025-12-23 00:26:40.405]	    | Already up to date.
+[2025-12-23 00:26:40.412]	  "tmux-continuum" update success
+[2025-12-23 00:26:40.420]	    | Already up to date.
+[2025-12-23 00:26:40.427]	  "tmux-copycat" update success
+[2025-12-23 00:26:40.434]	    | Already up to date.
+[2025-12-23 00:26:40.441]	  "tmux-themepack" update success
+[2025-12-23 00:26:40.449]	    | Already up to date.
+[2025-12-23 00:26:40.457]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-23 00:26:40.553]	Done.
+
+[2025-12-23 00:29:20.843]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator jimeh/tmux-themepack
+[2025-12-23 00:29:20.853]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-23 00:29:21.071]	Already installed "vim-tmux-navigator"
+[2025-12-23 00:29:21.079]	Already installed "tmux-themepack"
+[2025-12-23 00:29:21.087]	Already installed "tmux-copycat"
+[2025-12-23 00:29:21.095]	Already installed "tmux-continuum"
+[2025-12-23 00:29:21.103]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-23 00:29:21.263]	Updating all plugins!
+[2025-12-23 00:29:21.272]	
+[2025-12-23 00:29:22.049]	  "vim-tmux-navigator" update success
+[2025-12-23 00:29:22.057]	  "tmux-copycat" update success
+[2025-12-23 00:29:22.065]	    | Already up to date.
+[2025-12-23 00:29:22.072]	    | Already up to date.
+[2025-12-23 00:29:22.079]	  "tmux-continuum" update success
+[2025-12-23 00:29:22.086]	    | Already up to date.
+[2025-12-23 00:29:22.093]	  "tmux-themepack" update success
+[2025-12-23 00:29:22.101]	    | Already up to date.
+[2025-12-23 00:29:22.109]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-23 00:29:22.206]	Done.
+
+[2025-12-23 00:29:26.189]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator jimeh/tmux-themepack
+[2025-12-23 00:29:26.198]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-23 00:29:26.413]	Already installed "tmux-copycat"
+[2025-12-23 00:29:26.421]	Already installed "vim-tmux-navigator"
+[2025-12-23 00:29:26.429]	Already installed "tmux-continuum"
+[2025-12-23 00:29:26.437]	Already installed "tmux-themepack"
+[2025-12-23 00:29:26.446]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-23 00:29:26.602]	Updating all plugins!
+[2025-12-23 00:29:26.612]	
+[2025-12-23 00:29:27.407]	  "tmux-copycat" update success
+[2025-12-23 00:29:27.416]	  "vim-tmux-navigator" update success
+[2025-12-23 00:29:27.424]	    | Already up to date.
+[2025-12-23 00:29:27.431]	    | Already up to date.
+[2025-12-23 00:29:27.439]	  "tmux-continuum" update success
+[2025-12-23 00:29:27.446]	    | Already up to date.
+[2025-12-23 00:29:27.453]	  "tmux-themepack" update success
+[2025-12-23 00:29:27.460]	    | Already up to date.
+[2025-12-23 00:29:27.468]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-23 00:29:27.577]	Done.
+
+[2025-12-23 00:29:31.460]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator jimeh/tmux-themepack
+[2025-12-23 00:29:31.469]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-23 00:29:31.692]	Already installed "tmux-continuum"
+[2025-12-23 00:29:31.701]	Already installed "vim-tmux-navigator"
+[2025-12-23 00:29:31.709]	Already installed "tmux-copycat"
+[2025-12-23 00:29:31.717]	Already installed "tmux-themepack"
+[2025-12-23 00:29:31.725]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-23 00:29:31.883]	Updating all plugins!
+[2025-12-23 00:29:31.893]	
+[2025-12-23 00:29:32.686]	  "tmux-copycat" update success
+[2025-12-23 00:29:32.695]	    | Already up to date.
+[2025-12-23 00:29:32.703]	  "tmux-continuum" update success
+[2025-12-23 00:29:32.711]	    | Already up to date.
+[2025-12-23 00:29:32.718]	  "tmux-themepack" update success
+[2025-12-23 00:29:32.726]	    | Already up to date.
+[2025-12-23 00:29:32.733]	  "vim-tmux-navigator" update success
+[2025-12-23 00:29:32.740]	    | Already up to date.
+[2025-12-23 00:29:32.748]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-23 00:29:32.844]	Done.
+
+[2025-12-23 00:29:36.168]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator jimeh/tmux-themepack
+[2025-12-23 00:29:36.177]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-23 00:29:36.392]	Already installed "vim-tmux-navigator"
+[2025-12-23 00:29:36.401]	Already installed "tmux-copycat"
+[2025-12-23 00:29:36.409]	Already installed "tmux-continuum"
+[2025-12-23 00:29:36.417]	Already installed "tmux-themepack"
+[2025-12-23 00:29:36.425]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-23 00:29:36.582]	Updating all plugins!
+[2025-12-23 00:29:36.591]	
+[2025-12-23 00:29:37.377]	  "tmux-copycat" update success
+[2025-12-23 00:29:37.385]	  "tmux-continuum" update success
+[2025-12-23 00:29:37.393]	    | Already up to date.
+[2025-12-23 00:29:37.400]	    | Already up to date.
+[2025-12-23 00:29:37.408]	  "vim-tmux-navigator" update success
+[2025-12-23 00:29:37.415]	    | Already up to date.
+[2025-12-23 00:29:37.422]	  "tmux-themepack" update success
+[2025-12-23 00:29:37.429]	    | Already up to date.
+[2025-12-23 00:29:37.437]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-23 00:29:37.534]	Done.
+
+[2025-12-23 00:47:27.161]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator jimeh/tmux-themepack
+[2025-12-23 00:47:27.170]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-23 00:47:27.907]	Already installed "tmux-themepack"
+[2025-12-23 00:47:27.916]	Already installed "tmux-continuum"
+[2025-12-23 00:47:27.924]	Already installed "vim-tmux-navigator"
+[2025-12-23 00:47:27.932]	Already installed "tmux-copycat"
+[2025-12-23 00:47:27.940]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-23 00:47:28.806]	Updating all plugins!
+[2025-12-23 00:47:28.817]	
+[2025-12-23 00:47:29.631]	  "tmux-continuum" update success
+[2025-12-23 00:47:29.640]	  "tmux-copycat" update success
+[2025-12-23 00:47:29.647]	    | Already up to date.
+[2025-12-23 00:47:29.655]	    | Already up to date.
+[2025-12-23 00:47:29.662]	  "vim-tmux-navigator" update success
+[2025-12-23 00:47:29.670]	    | Already up to date.
+[2025-12-23 00:47:29.677]	  "tmux-themepack" update success
+[2025-12-23 00:47:29.684]	    | Already up to date.
+[2025-12-23 00:47:29.692]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-23 00:47:29.787]	Done.
+
+[2025-12-23 00:47:32.474]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator jimeh/tmux-themepack
+[2025-12-23 00:47:32.483]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-23 00:47:32.708]	Already installed "vim-tmux-navigator"
+[2025-12-23 00:47:32.716]	Already installed "tmux-continuum"
+[2025-12-23 00:47:32.724]	Already installed "tmux-copycat"
+[2025-12-23 00:47:32.732]	Already installed "tmux-themepack"
+[2025-12-23 00:47:32.741]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-23 00:47:32.913]	Updating all plugins!
+[2025-12-23 00:47:32.923]	
+[2025-12-23 00:47:33.701]	  "tmux-copycat" update success
+[2025-12-23 00:47:33.709]	    | Already up to date.
+[2025-12-23 00:47:33.717]	  "vim-tmux-navigator" update success
+[2025-12-23 00:47:33.724]	    | Already up to date.
+[2025-12-23 00:47:33.732]	  "tmux-themepack" update success
+[2025-12-23 00:47:33.739]	    | Already up to date.
+[2025-12-23 00:47:33.746]	  "tmux-continuum" update success
+[2025-12-23 00:47:33.753]	    | Already up to date.
+[2025-12-23 00:47:33.761]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-23 00:47:33.861]	Done.
+
+[2025-12-23 00:55:20.593]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator jimeh/tmux-themepack
+[2025-12-23 00:55:20.603]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-23 00:55:21.710]	Already installed "tmux-copycat"
+[2025-12-23 00:55:21.719]	Already installed "tmux-continuum"
+[2025-12-23 00:55:21.727]	Already installed "vim-tmux-navigator"
+[2025-12-23 00:55:21.735]	Already installed "tmux-themepack"
+[2025-12-23 00:55:21.743]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-23 00:55:22.345]	Updating all plugins!
+[2025-12-23 00:55:22.356]	
+[2025-12-23 00:55:23.132]	  "tmux-copycat" update success
+[2025-12-23 00:55:23.140]	  "tmux-continuum" update success
+[2025-12-23 00:55:23.147]	    | Already up to date.
+[2025-12-23 00:55:23.154]	    | Already up to date.
+[2025-12-23 00:55:23.408]	  "vim-tmux-navigator" update success
+[2025-12-23 00:55:23.416]	    | Already up to date.
+[2025-12-23 00:55:23.424]	  "tmux-themepack" update success
+[2025-12-23 00:55:23.431]	    | Already up to date.
+[2025-12-23 00:55:23.441]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-23 00:55:23.536]	Done.
+
+[2025-12-23 01:05:12.443]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator jimeh/tmux-themepack
+[2025-12-23 01:05:12.452]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-23 01:05:13.180]	Already installed "tmux-continuum"
+[2025-12-23 01:05:13.189]	Already installed "tmux-copycat"
+[2025-12-23 01:05:13.197]	Already installed "tmux-themepack"
+[2025-12-23 01:05:13.205]	Already installed "vim-tmux-navigator"
+[2025-12-23 01:05:13.213]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-23 01:05:13.864]	Updating all plugins!
+[2025-12-23 01:05:13.874]	
+[2025-12-23 01:05:14.669]	  "vim-tmux-navigator" update success
+[2025-12-23 01:05:14.678]	    | Already up to date.
+[2025-12-23 01:05:14.687]	  "tmux-copycat" update success
+[2025-12-23 01:05:14.695]	    | Already up to date.
+[2025-12-23 01:05:14.703]	  "tmux-continuum" update success
+[2025-12-23 01:05:14.711]	    | Already up to date.
+[2025-12-23 01:05:14.735]	  "tmux-themepack" update success
+[2025-12-23 01:05:14.742]	    | Already up to date.
+[2025-12-23 01:05:14.750]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-23 01:05:14.847]	Done.
+
+[2025-12-23 10:51:46.561]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator jimeh/tmux-themepack
+[2025-12-23 10:51:46.570]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-23 10:51:47.102]	Already installed "vim-tmux-navigator"
+[2025-12-23 10:51:47.111]	Already installed "tmux-themepack"
+[2025-12-23 10:51:47.119]	Already installed "tmux-copycat"
+[2025-12-23 10:51:47.127]	Already installed "tmux-continuum"
+[2025-12-23 10:51:47.135]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-23 10:51:47.622]	Updating all plugins!
+[2025-12-23 10:51:47.633]	
+[2025-12-23 10:51:48.410]	  "vim-tmux-navigator" update success
+[2025-12-23 10:51:48.419]	  "tmux-copycat" update success
+[2025-12-23 10:51:48.427]	    | Already up to date.
+[2025-12-23 10:51:48.435]	    | Already up to date.
+[2025-12-23 10:51:48.443]	  "tmux-continuum" update success
+[2025-12-23 10:51:48.450]	    | Already up to date.
+[2025-12-23 10:51:48.457]	  "tmux-themepack" update success
+[2025-12-23 10:51:48.464]	    | Already up to date.
+[2025-12-23 10:51:48.472]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-23 10:51:48.579]	Done.
+
+[2025-12-24 13:05:33.531]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator jimeh/tmux-themepack
+[2025-12-24 13:05:33.540]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-24 13:05:33.772]	Already installed "vim-tmux-navigator"
+[2025-12-24 13:05:33.781]	Already installed "tmux-continuum"
+[2025-12-24 13:05:33.789]	Already installed "tmux-copycat"
+[2025-12-24 13:05:33.796]	Already installed "tmux-themepack"
+[2025-12-24 13:05:33.805]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-24 13:05:33.972]	Updating all plugins!
+[2025-12-24 13:05:33.982]	
+[2025-12-24 13:05:35.036]	  "tmux-themepack" update success
+[2025-12-24 13:05:35.045]	    | Already up to date.
+[2025-12-24 13:05:35.077]	  "tmux-continuum" update success
+[2025-12-24 13:05:35.085]	    | Already up to date.
+[2025-12-24 13:05:35.103]	  "tmux-copycat" update success
+[2025-12-24 13:05:35.111]	    | Already up to date.
+[2025-12-24 13:05:35.221]	  "vim-tmux-navigator" update success
+[2025-12-24 13:05:35.228]	    | Already up to date.
+[2025-12-24 13:05:35.236]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-24 13:05:35.339]	Done.
+
+[2025-12-31 09:53:37.670]	List of discovered tpm plugins: tmux-plugins/tmux-copycat tmux-plugins/tmux-continuum christoomey/vim-tmux-navigator jimeh/tmux-themepack
+[2025-12-31 09:53:37.679]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/install_plugins
+[2025-12-31 09:53:37.910]	Already installed "tmux-continuum"
+[2025-12-31 09:53:37.918]	Already installed "tmux-copycat"
+[2025-12-31 09:53:37.926]	Already installed "vim-tmux-navigator"
+[2025-12-31 09:53:37.934]	Already installed "tmux-themepack"
+[2025-12-31 09:53:37.943]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/update_plugins all
+[2025-12-31 09:53:38.560]	Updating all plugins!
+[2025-12-31 09:53:38.571]	
+[2025-12-31 09:53:39.368]	  "tmux-copycat" update success
+[2025-12-31 09:53:39.377]	    | Already up to date.
+[2025-12-31 09:53:39.385]	  "vim-tmux-navigator" update success
+[2025-12-31 09:53:39.393]	    | Already up to date.
+[2025-12-31 09:53:39.400]	  "tmux-themepack" update success
+[2025-12-31 09:53:39.408]	    | Already up to date.
+[2025-12-31 09:53:39.415]	  "tmux-continuum" update success
+[2025-12-31 09:53:39.422]	    | Already up to date.
+[2025-12-31 09:53:39.430]	Invoking /Users/subhadip/.config/tmux/plugins/tpm/bin/clean_plugins all
+[2025-12-31 09:53:39.544]	Done.
+
