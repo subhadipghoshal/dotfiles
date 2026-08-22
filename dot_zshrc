@@ -13,7 +13,7 @@ fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 # export PATH=/opt/homebrew/bin:/opt/homebrew/Cellar/git/2.43.0/bin:/opt/homebrew/opt/llvm/bin:$PATH
-export PATH=/opt/homebrew/bin:/opt/homebrew/Cellar/git/2.43.0/bin:/Users/sghoshal/.pyenv/versions/3.12.0/lib/python3.12/site-packages:/opt/homebrew/opt/libpq/bin:/Users/sghoshal/.local/bin:$GOPATH/bin:$PATH
+export PATH=/opt/homebrew/bin:/opt/homebrew/opt/libpq/bin:$HOME/.local/bin:$PATH
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 export LANG="en_US.UTF-8"
@@ -109,6 +109,10 @@ plugins=(
 	helm
 	aliases
   chezmoi
+  gradle
+  mvn
+  dotnet
+  sdk
 	# nvm
 	# npm
 	rust
@@ -120,9 +124,11 @@ plugins=(
   # yazi-zoxide-zsh
   # kubetail
   vi-mode
-  fzf
   # zsh-vi-mode
 )
+# Note: fzf is set up manually below (guarded, with the upstream `fzf --zsh`
+# integration) instead of via the oh-my-zsh `fzf` plugin, so we control when
+# and how it loads.
 
 
 ZSH_DISABLE_COMPFIX=true
@@ -182,12 +188,8 @@ setopt HIST_FIND_NO_DUPS
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='nvim'
-else
-   export EDITOR='nvim'
-fi
+# Preferred editor for local and remote sessions (same either way)
+export EDITOR='nvim'
 
 # Compilation flags
 export ARCHFLAGS="-arch arm64"
@@ -202,9 +204,6 @@ export ARCHFLAGS="-arch arm64"
 if [ -f ${HOME}/.zsh/zsh_aliases ]; then
     . ${HOME}/.zsh/zsh_aliases
 fi
-
-# Load nvim as editor
-export EDITOR=nvim
 
 zstyle :omz:plugins:iterm2 shell-integration yes
 
@@ -227,49 +226,17 @@ if [ -f ${HOME}/.zsh/zsh_cat ]; then
     . ${HOME}/.zsh/zsh_cat
 fi
 
+# (Removed dead includes for zsh_pyenv/zsh_git/zsh_aws_shell/zsh_docker/
+# zsh_k8s/zsh_p10k — none of those files exist in ~/.zsh/; re-add here if
+# you split those out again later.)
 
-# Pyenv
-
-if [ -f ${HOME}/.zsh/zsh_pyenv ]; then
-    . ${HOME}/.zsh/zsh_pyenv
+# fzf: modern upstream integration (replaces the old key-bindings.zsh /
+# completion.zsh dance, which threw a benign "can't change option: zle"
+# error on every shell start under fzf 0.74). Stderr is suppressed for the
+# same reason.
+if command -v fzf >/dev/null 2>&1; then
+  eval "$(fzf --zsh 2>/dev/null)" 2>/dev/null
 fi
-
-# git
-
-
-if [ -f ${HOME}/.zsh/zsh_git ]; then
-    . ${HOME}/.zsh/zsh_git
-fi
-
-
-# AWS
-
-
-if [ -f ${HOME}/.zsh/zsh_aws_shell ]; then
-    . ${HOME}/.zsh/zsh_aws_shell
-fi
-
-# Docker
-
-
-if [ -f ${HOME}/.zsh/zsh_docker ]; then
-    . ${HOME}/.zsh/zsh_docker
-fi
-
-# Kubernetes
-
-if [ -f ${HOME}/.zsh/zsh_k8s ]; then
-   . ${HOME}/.zsh/zsh_k8s
-fi
-
-# p10k
-if [ -f ${HOME}/.zsh/zsh_p10k ]; then
-   . ${HOME}/.zsh/zsh_p10k
-fi
-
-
-# fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -288,6 +255,9 @@ check_port_usage() {
     lsof -n -i :"$1" | grep LISTEN
 }
 
+# Init goenv
+command -v goenv >/dev/null && eval "$(goenv init -)"
+
 
 
 # The next line updates PATH for the Google Cloud SDK.
@@ -304,4 +274,34 @@ if [ -f '/Users/subhadip/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then 
 # bun completions
 [ -s "/Users/subhadip/.bun/_bun" ] && source "/Users/subhadip/.bun/_bun"
 
+
+
+# OpenHarness
+export PATH="/Users/subhadip/.local/bin:$PATH"
+
+# Final PATH cleanup: by this point .zshenv, .zprofile, and everything above
+# in .zshrc have all had a chance to prepend/append to PATH, often re-adding
+# entries that were already there (homebrew, .local/bin, rbenv shims, etc.).
+# This collapses it down to unique entries, order preserved.
+path=("${(u)path[@]}")
+
+# >>> portable-secrets >>>
+# Shell integration only; secret values stay in pass and project .envrc files.
+if [[ -o interactive ]]; then
+  export GPG_TTY="$(tty)"
+  eval "$(direnv hook zsh)"
+fi
+# <<< portable-secrets <<<
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# sdkman-init.sh prepends its candidates' bin dirs to PATH on every source,
+# so dedupe once more now that it's had its turn.
+path=("${(u)path[@]}")
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/subhadip/.lmstudio/bin"
+# End of LM Studio CLI section
 

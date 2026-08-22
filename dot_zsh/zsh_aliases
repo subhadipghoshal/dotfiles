@@ -6,8 +6,6 @@ alias vim=nvim
 
 alias krr="kubectl rollout restart"
 
-alias dot='git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
-
 
 
 safe_clean() {
@@ -65,3 +63,19 @@ safe_clean() {
 
 
 alias tempclean='safe_clean trash'
+
+loadenv() {
+  if [ ! -f "$1" ]; then
+    echo "No such file: $1"
+    return 1
+  fi
+
+  while IFS='=' read -r key value; do
+    [[ $key =~ ^\s*# ]] && continue
+    [[ -z $key ]] && continue
+    value="${value%\"}"
+    value="${value#\"}"
+    export "$key=$value"
+  done < "$1"
+}
+
