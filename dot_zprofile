@@ -1,9 +1,8 @@
 
-# Prefer unique entries in these arrays going forward. (In practice this
-# doesn't retroactively dedupe scalar `PATH="...:$PATH"` concatenation done
-# later in this file and in .zshrc — see the explicit cleanup pass at the
-# very end of .zshrc, which is what actually removes duplicates.)
-typeset -U fpath cdpath manpath
+# `typeset -U path PATH fpath cdpath manpath` deliberately lives in ~/.zshenv,
+# NOT here. .zprofile is only read by LOGIN shells, so when the dedupe was here
+# a plain `zsh` produced a differently-hashed fpath and oh-my-zsh deleted the
+# compdump on every non-login shell. See ~/.zshenv for the full explanation.
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -14,17 +13,30 @@ export VISUAL="nvim"
 
 export MANPAGER="sh -c 'col -bx | bat --theme=default -l man --style=plain --color=always --paging=always'" 
 export CFLAGS="-I/opt/homebrew/include -I/opt/homebrew/include/SDL2"
-export LDFLAGS="-L/opt/homebrew/lib -L/opt/homebrew/lib/cmake -L/opt/homebrew/lib/pkgconfig"
-export PKG_CONFIG_PATH="/opt/homebrew/lib/pkgconfig"
+# /opt/homebrew/lib/cmake and .../pkgconfig contain zero .dylib/.a files —
+# verified — so passing them to every link was pure noise.
+export LDFLAGS="-L/opt/homebrew/lib"
+# PKG_CONFIG_PATH was set to exactly /opt/homebrew/lib/pkgconfig, which
+# pkg-config already searches by default, while SHADOWING the 186 keg-only
+# .pc directories under /opt/homebrew/opt/*/lib/pkgconfig (openssl, libpq,
+# icu4c). Classic "configure can't find X". Left unset on purpose.
 # export LDFLAGS="-L/opt/homebrew/opt/libpq/lib"
 # export CPPFLAGS="-I/opt/homebrew/opt/libpq/include"
 export PYTHON_AUTO_VRUN=true
 export PYTHON_VENV_NAME=".venv"
 export EXPAND_ALIASES=false
-export FZF_DEFAULT_OPTS="--layout=reverse --border --cycle --wrap --preview 'bat --color=always --style=numbers {}' --preview-window right:70%"
+# The --preview here used to be global, so it applied to EVERY fzf invocation
+# including Ctrl-R, where {} is a command string rather than a filename — the
+# history preview pane had been rendering bat errors. File previews now belong
+# to the widgets that actually select files.
+export FZF_DEFAULT_OPTS="--layout=reverse --border --cycle --wrap --height=60%"
+export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=numbers {} 2>/dev/null || eza -1 --color=always {}' --preview-window right:70%"
+export FZF_ALT_C_OPTS="--preview 'eza -1 --icons --color=always {}' --preview-window right:50%"
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
 
 # GO ENV
 export GOENV_ROOT="$HOME/.goenv"
+export GOENV_DISABLE_GOPATH=1
 export PATH="$GOENV_ROOT:$PATH"
 
 export GOPATH="$HOME/go"

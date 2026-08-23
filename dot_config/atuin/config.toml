@@ -1,0 +1,47 @@
+# Atuin — shell history in SQLite, recording exit code, duration, cwd and
+# session id per command. Those four fields are the point: they turn "the
+# kubectl command that worked, in this directory" from a grep you cannot write
+# into a query you can. ~/.zsh/50-ai.zsh (fix, ctx) reads them.
+#
+# The plain ~/.zsh_history file keeps being written too — atuin does not replace
+# it — so nothing here is a one-way door.
+
+## ⚠️ The default for this is TRUE, and true means Enter EXECUTES the selected
+## command immediately. Off, so Enter puts the command on the line for you to
+## look at (and for F-Sy-H to highlight) before you run it.
+enter_accept = false
+
+## Detects `bindkey -v` and behaves like vi mode inside the search UI.
+keymap_mode = "auto"
+
+## Render inline under the prompt rather than taking the whole screen.
+inline_height = 20
+style = "compact"
+show_preview = true
+
+## Up-arrow is left to zsh (see --disable-up-arrow in .zshrc); when it is used,
+## scope it to the current directory, which is the useful default with vi mode
+## already providing k/j history navigation.
+filter_mode_shell_up_key_binding = "directory"
+
+## Ctrl-R starts scoped to the whole machine; <Ctrl-R> again cycles modes.
+filter_mode = "global"
+search_mode = "fuzzy"
+
+## Keep failures visible — the whole value of `fix` depends on them being there.
+## (Atuin records exit codes regardless; this is just the UI default.)
+## Commands that are almost never what you are searching for:
+history_filter = [
+  "^ ",
+]
+
+## ── Secrets ──────────────────────────────────────────────────────────────
+## Sync is NOT enabled and should stay that way until this list is reviewed:
+## the existing 6,866-command history contains `export FOO=...` lines and at
+## least one `curl -H "Authorization: ..."`. `atuin login` would upload them.
+## secrets_filter refuses to RECORD anything matching a known key shape.
+secrets_filter = true
+
+## Local only. No account, no server, nothing leaves this machine.
+auto_sync = false
+update_check = false

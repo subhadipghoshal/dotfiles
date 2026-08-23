@@ -1,1 +1,15 @@
+# .zshenv — read by EVERY zsh (login, non-login, interactive, script).
+#
+# `typeset -U` lives here and NOT in .zprofile for one specific reason:
+# .zprofile is only read by LOGIN shells. When it held the dedupe, typing `zsh`
+# at a prompt produced a duplicated fpath that hashed differently from the one
+# recorded in the compdump (4,823 chars vs 1,862). oh-my-zsh compares those
+# hashes (oh-my-zsh.sh:120) and DELETES the compdump on mismatch — so the next
+# login shell paid a full cold compinit, 213-480ms. Setting it here makes every
+# shell agree on fpath, so the dump survives.
+#
+# Keeping `path` in the list also makes the two manual `path=("${(u)path[@]}")`
+# cleanup passes that used to live at the end of .zshrc unnecessary.
+typeset -U path PATH fpath cdpath manpath
+
 . "$HOME/.cargo/env"
