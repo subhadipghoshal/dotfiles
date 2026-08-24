@@ -1,0 +1,4 @@
+interface:
+  display_name: "Behavior-First Testing"
+  short_description: "Design tests around observable user behavior"
+  default_prompt: "Use $behavior-first-testing to design tests for this behavior change."

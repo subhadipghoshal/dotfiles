@@ -4,7 +4,7 @@
 # Never blocks session start: any failure exits 0.
 #
 # Adapted from hooks/always-on.sh in ayghri/i-have-adhd v0.2.0. Only change:
-# SKILL.md resolves to the canonical copy in ~/.agents/skills/ instead of a
+# SKILL.md resolves to the canonical copy in ~/.config/agents/skills/ instead of a
 # path relative to a plugin install.
 
 claude_dir="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
@@ -13,7 +13,7 @@ flag_path="$claude_dir/.i-have-adhd-always"
 # Only fire when the user has opted in.
 [ -f "$flag_path" ] || exit 0
 
-skill_path="$HOME/.agents/skills/i-have-adhd/SKILL.md"
+skill_path="$HOME/.config/agents/skills/i-have-adhd/SKILL.md"
 [ -f "$skill_path" ] || exit 0
 
 # Strip a leading YAML frontmatter block (--- ... --- at the very top of file).

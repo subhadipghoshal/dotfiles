@@ -1,0 +1,4 @@
+interface:
+  display_name: "Defensive Design"
+  short_description: "Design resilient and secure system boundaries"
+  default_prompt: "Use $defensive-design to review this design’s boundaries and failure modes."

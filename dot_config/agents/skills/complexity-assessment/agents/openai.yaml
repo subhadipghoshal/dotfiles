@@ -1,0 +1,4 @@
+interface:
+  display_name: "Complexity Assessment"
+  short_description: "Assess technical scope, risk, and verification"
+  default_prompt: "Use $complexity-assessment to assess this task’s technical complexity."

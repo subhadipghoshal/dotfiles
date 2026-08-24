@@ -2,7 +2,7 @@
 //
 // Adapted from .opencode/plugins/i-have-adhd.mjs in ayghri/i-have-adhd v0.2.0.
 // Changes from upstream: SKILL.md resolves to the canonical copy at
-// ~/.agents/skills/i-have-adhd/SKILL.md instead of a plugin-relative path.
+// the XDG agent skill root instead of a plugin-relative path.
 //
 //   • On demand   — registers the skills directory so the skill tool and
 //                   /i-have-adhd can load the ruleset for the session.
@@ -16,13 +16,14 @@ import fs from 'fs';
 import os from 'os';
 import path from 'path';
 
-const skillsDir = path.join(os.homedir(), '.agents', 'skills');
+const xdgConfigHome = process.env.XDG_CONFIG_HOME || path.join(os.homedir(), '.config');
+const skillsDir = path.join(xdgConfigHome, 'agents', 'skills');
 const skillPath = path.join(skillsDir, 'i-have-adhd', 'SKILL.md');
 
 // Always-on opt-in flag, mirroring Claude Code's ~/.claude/.i-have-adhd-always
 // but under OpenCode's config dir so the two tools stay independent.
 const flagPath = path.join(
-  process.env.XDG_CONFIG_HOME || path.join(os.homedir(), '.config'),
+  xdgConfigHome,
   'opencode',
   '.i-have-adhd-always',
 );

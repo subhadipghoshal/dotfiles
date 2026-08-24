@@ -1,0 +1,4 @@
+interface:
+  display_name: "macOS Shell Config"
+  short_description: "Change the macOS shell configuration safely"
+  default_prompt: "Use $macos-shell-config before changing shell, tmux, or chezmoi configuration."

@@ -15,8 +15,8 @@ encoding (`dot_zshrc` → `~/.zshrc`, `private_` → mode 0700,
 | `dot_p10k.zsh` | `~/.p10k.zsh` | powerlevel10k prompt |
 | `dot_config/nvim/` | `~/.config/nvim/` | LazyVim-based neovim config |
 | `dot_config/tmux/` | `~/.config/tmux/` | tmux config, split into `conf/` + `scripts/` |
-| `dot_config/agents/AGENTS.md` | `~/.config/agents/AGENTS.md` | canonical global agent instructions |
-| `dot_agents/skills/` | `~/.agents/skills/` | shared agent skills |
+| `dot_config/agents/` | `~/.config/agents/` | global policy, machine context, and managed shared skills |
+| `symlink_dot_agents` | `~/.agents` | compatibility link to the XDG agent config root |
 | `private_dot_claude/` | `~/.claude/` | Claude Code settings, commands, skills |
 | `dot_codex/`, `dot_config/opencode/` | | symlinks to the canonical `AGENTS.md` |
 | `dot_config/zsh-sandbox/` | `~/.config/zsh-sandbox/` | isolated `ZDOTDIR` harness for testing shell changes |
