@@ -3,37 +3,15 @@ return {
     "fladson/vim-kitty",
     ft = "kitty",
   },
-  { "stevanmilic/nvim-lspimport" },
   {
-    "kawre/leetcode.nvim",
-    lazy = false,
-    build = ":TSUpdate html", -- if you have `nvim-treesitter` installed
-    dependencies = {
-      -- include a picker of your choice, see picker section for more details
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-    },
-    opts = {
-      -- configuration goes here
-      lang = "python3",
-      logging = true,
-      picker = { provider = "telescope" },
-      plugins = { non_standalone = true },
-      injector = { ---@type table<lc.lang, lc.inject>
-        ["python3"] = {
-          imports = function(default_imports)
-            vim.list_extend(default_imports, { "from .leetcode import *" })
-            return default_imports
-          end,
-          after = { "def test():", "    print('test')" },
-        },
-        ["cpp"] = {
-          imports = function()
-            -- return a different list to omit default imports
-            return { "#include <bits/stdc++.h>", "using namespace std;" }
-          end,
-          after = "int main() {}",
-        },
+    "stevanmilic/nvim-lspimport",
+    keys = {
+      {
+        "<leader>ci",
+        function()
+          require("lspimport").import()
+        end,
+        desc = "Resolve an import",
       },
     },
   },
@@ -42,22 +20,12 @@ return {
     version = "*", -- recommended, use latest release instead of latest commit
     lazy = true,
     ft = "markdown",
-    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-    -- event = {
-    --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-    --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
-    --   -- refer to `:h file-pattern` for more examples
-    --   "BufReadPre path/to/my-vault/*.md",
-    --   "BufNewFile path/to/my-vault/*.md",
-    -- },
     dependencies = {
       -- Required.
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons",
-
-      -- see below for full list of optional dependencies 👇
     },
     opts = {
       workspaces = {
@@ -70,8 +38,6 @@ return {
           path = "~/vaults/work",
         },
       },
-
-      -- see below for full list of options 👇
     },
   },
   {
