@@ -87,9 +87,18 @@ wt() {
   # directory you started from wondering whether anything happened.
   cd -- "$dir" || return
 
+  # Strip agent markers before handing off: `wt`/`agent` is exactly how a
+  # running agent spins up its own worktree+session (50-ai.zsh), and these
+  # vars are exported, so an agent-flagged shell would otherwise bake
+  # CLAUDECODE/etc. into the new tmux session's environment permanently.
+  # Every pane opened in that session afterward — including a human typing
+  # into it later — would then keep failing 99-agent-guard.zsh's check
+  # forever. See `deagent` in 99-agent-guard.zsh for clearing an already-
+  # poisoned pane.
   local sessionizer=$HOME/.config/tmux/scripts/sessionizer.sh
   if [[ -x $sessionizer ]] && command -v tmux >/dev/null 2>&1; then
-    "$sessionizer" "$dir" 2>/dev/null || true
+    env -u CLAUDECODE -u CI -u CODEX_SANDBOX -u CURSOR_AGENT -u OPENCODE -u ZSH_AGENT_MODE \
+      "$sessionizer" "$dir" 2>/dev/null || true
   fi
 }
 

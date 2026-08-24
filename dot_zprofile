@@ -11,7 +11,20 @@ export PATH="$PATH:/Users/subhadip/.local/bin"
 
 export VISUAL="nvim"
 
-export MANPAGER="sh -c 'col -bx | bat --theme=default -l man --style=plain --color=always --paging=always'" 
+if [[ -o interactive && -t 1 && ${ZSH_AGENT_MODE:-} != 1 \
+      && ( -n ${TMUX:-} || ( -z ${CLAUDECODE:-} && -z ${CI:-} \
+      && -z ${CODEX_SANDBOX:-} && -z ${CURSOR_AGENT:-} && -z ${OPENCODE:-} ) ) ]]; then
+  export PAGER=less
+  export MANPAGER="sh -c 'col -bx | bat --theme=default -l man --style=plain --color=always --paging=auto'"
+  unset GIT_PAGER DELTA_PAGER
+  export LESS=-R
+else
+  export PAGER=cat
+  export MANPAGER=cat
+  export GIT_PAGER=cat
+  export DELTA_PAGER=cat
+  export LESS=-FRX
+fi
 export CFLAGS="-I/opt/homebrew/include -I/opt/homebrew/include/SDL2"
 # /opt/homebrew/lib/cmake and .../pkgconfig contain zero .dylib/.a files —
 # verified — so passing them to every link was pure noise.

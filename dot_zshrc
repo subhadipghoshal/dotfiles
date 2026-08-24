@@ -58,24 +58,6 @@ ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 ZSH_AUTOSUGGEST_USE_ASYNC=1
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
-# Trimmed from 28 to 16. What was removed and why — 6,886 commands of history
-# were checked for every one of these:
-#
-#   zsh-completions   191 completion files covering ZERO of the tools actually
-#                     used here. No _go, _make, _npm, _bootdev, _lazygit,
-#                     _ollama. What it does ship: _afew, _archlinux-java,
-#                     _bitcoin-cli, _cask. Pure fpath tax.
-#   autoupdate        forks `tput` six times at load (~20ms) and races the
-#                     built-in `zstyle ':omz:update'` updater.
-#   gitignore         never used.
-#   git-extras        never used.
-#   docker-compose    never used (docker itself: 249 uses, kept).
-#   poetry            never used — migrated to uv.
-#   poetry-env        never used.
-#   pip               never used — `pipu` etc. superseded by uv (185 uses).
-#   kubectx           never used (kubectl: 320 uses, kept — best ROI here).
-#   urltools          never used.
-#   web-search        never used.
 #
 # fzf-tab must load AFTER compinit (oh-my-zsh runs it at line 129) and BEFORE
 # any plugin that wraps ZLE widgets — zsh-autosuggestions and F-Sy-H both do.

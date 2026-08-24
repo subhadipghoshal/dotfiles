@@ -14,10 +14,9 @@
 #                         (`git log --oneline` does not hang — short lines let
 #                         less exit on its own. show/diff are the real cases.)
 #
-#   man <anything>        exit 124, HANG.  MANPAGER in .zprofile uses
-#                         `bat --paging=always`. Verified that switching to
-#                         --paging=auto does NOT fix it: bat sees the pty as a
-#                         terminal and pages regardless. Only PAGER=cat works.
+#   man <anything>        exit 124, HANG.  MANPAGER in .zprofile uses bat as
+#                         an interactive pager. Agent mode replaces it with
+#                         MANPAGER=cat before a command can block.
 #
 #   tmux ls               command not found: _zsh_tmux_plugin_run. The oh-my-zsh
 #                         tmux plugin's alias survives a captured shell snapshot;
@@ -25,11 +24,13 @@
 #
 # Detection cannot key off `[[ ! -t 1 ]]` alone. That is true for Claude Code's
 # pipe-based Bash tool (which does NOT hang) and FALSE under a pty harness
-# (which does). So both conditions are tested. CLAUDECODE is the real variable
-# name — not CLAUDE_CODE.
+# (which does). An explicit ZSH_AGENT_MODE=1 covers agent PTYs. Ambient
+# OPENCODE/CI/etc. markers remain a fallback outside tmux, but are deliberately
+# ignored in a human tmux TTY because they can be inherited by the server.
 
-if [[ ! -t 1 || -n ${CLAUDECODE:-} || -n ${CI:-} || -n ${CODEX_SANDBOX:-} \
-      || -n ${CURSOR_AGENT:-} || -n ${OPENCODE:-} || -n ${ZSH_AGENT_MODE:-} ]]; then
+if [[ ! -t 1 || ${ZSH_AGENT_MODE:-} == 1 \
+      || ( -z ${TMUX:-} && ( -n ${CLAUDECODE:-} || -n ${CI:-} \
+      || -n ${CODEX_SANDBOX:-} || -n ${CURSOR_AGENT:-} || -n ${OPENCODE:-} ) ) ]]; then
 
   export PAGER=cat
   export MANPAGER=cat
@@ -50,5 +51,17 @@ if [[ ! -t 1 || -n ${CLAUDECODE:-} || -n ${CI:-} || -n ${CODEX_SANDBOX:-} \
   # Agents should get the real tool, not a wrapper that opens an editor.
   unalias v vim 2>/dev/null
 
-  export ZSH_AGENT_MODE=1
 fi
+
+# deagent — clear a stuck agent marker and reload a login shell. If this pane's
+# session inherited ZSH_AGENT_MODE=1 from an older tmux server, a session-local
+# zero prevents the server-wide value from coming back into the new shell.
+deagent() {
+  local session
+  session=$(command tmux display-message -p '#{session_name}' 2>/dev/null) || session=
+  if [[ -n $session ]]; then
+    command tmux set-environment -t "$session" ZSH_AGENT_MODE=0 2>/dev/null || true
+  fi
+  unset CLAUDECODE CI CODEX_SANDBOX CURSOR_AGENT OPENCODE ZSH_AGENT_MODE
+  exec zsh -l
+}

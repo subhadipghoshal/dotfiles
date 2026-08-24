@@ -35,7 +35,8 @@ agent() {
     wt "$2" || return
   fi
 
-  "$which" "${@:3}"
+  ZSH_AGENT_MODE=1 PAGER=cat MANPAGER=cat GIT_PAGER=cat DELTA_PAGER=cat LESS=-FRX \
+    "$which" "${@:3}"
 }
 
 alias cc='agent claude'

@@ -69,6 +69,7 @@ before being promoted.
 | `ctx` | `gctx` plus what you have actually run in this directory, with exit codes |
 | `fix` | last failing command + captured terminal output, formatted for an agent |
 | `agent <name> [branch]` | launch claude/codex/opencode/cursor-agent, optionally isolated in a worktree |
+| `deagent` | clear a stuck CLAUDECODE/CODEX_SANDBOX/CURSOR_AGENT/OPENCODE/ZSH_AGENT_MODE marker and reload — for a tmux pane that inherited one and is wrongly treated as an agent shell |
 
 ## Decisions worth knowing
 
@@ -140,6 +141,15 @@ leading flag list contains the flag. Verified correct on curl, tar, git-rebase,
 rsync, ssh, fd, ls, grep, rg, find, git-log — including `grep -r`, which BSD
 pages document as `-R, -r, --recursive`. Unusual layouts may still fool it;
 `mh <page>` then `manx <page> <SECTION>` is the reliable fallback.
+
+**Agent markers must not decide human tmux behavior.** `99-agent-guard.zsh`
+uses `ZSH_AGENT_MODE=1` for an agent PTY and `[[ ! -t 1 ]]` for captured
+output. Ambient `CLAUDECODE`/`CODEX_SANDBOX`/`CURSOR_AGENT`/`OPENCODE`/`CI`
+markers remain a fallback outside tmux, but are ignored in a human tmux TTY
+because they can be inherited by the server. `agent()` sets the explicit
+marker only on the agent process, and the tmux sessionizer gives new sessions
+safe marker values. For an existing poisoned session, run `deagent` to set a
+session-local human override and reload the login shell.
 
 ## Still open
 
