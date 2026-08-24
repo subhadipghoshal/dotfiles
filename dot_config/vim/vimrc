@@ -1,0 +1,35 @@
+if v:version < 902
+  echoerr printf('Fallback Vim requires Vim 9.2 or newer; found %d.%d', v:version / 100, v:version % 100)
+  finish
+endif
+
+let mapleader = ' '
+let maplocalleader = ' '
+
+let s:config_root = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+let g:fallback_config_root = s:config_root
+
+if index(split(&runtimepath, ','), s:config_root) < 0
+  let &runtimepath = s:config_root . ',' . &runtimepath
+endif
+let s:after_dir = s:config_root . '/after'
+if index(split(&runtimepath, ','), s:after_dir) < 0
+  let &runtimepath .= ',' . s:after_dir
+endif
+if index(split(&packpath, ','), s:config_root) < 0
+  let &packpath = s:config_root . ',' . &packpath
+endif
+if index(split(&packpath, ','), s:after_dir) < 0
+  let &packpath .= ',' . s:after_dir
+endif
+
+for s:module in ['options', 'plugins', 'tooling', 'mappings', 'autocmds']
+  let s:path = s:config_root . '/config/' . s:module . '.vim'
+  if !filereadable(s:path)
+    echoerr 'Fallback Vim configuration module is missing: ' . s:path
+    finish
+  endif
+  execute 'source ' . fnameescape(s:path)
+endfor
+
+unlet s:module s:path s:after_dir s:config_root

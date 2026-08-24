@@ -1,0 +1,108 @@
+{
+  "extensions.updateCheck": "never",
+  "coc.preferences.formatOnSaveFiletypes": [],
+  "diagnostic.enable": false,
+  "java.debug.vimspector.config.createIfNotExists": false,
+  "java.project.importHint": false,
+  "java.showBuildStatusOnStart.enabled": false,
+  "suggest.enablePreselect": false,
+  "suggest.noselect": true,
+  "suggest.snippetIndicator": "~",
+  "snippets.ultisnips.enable": true,
+  "languageserver": {
+    "ansible": {
+      "command": "ansible-language-server",
+      "args": ["--stdio"],
+      "filetypes": ["ansible", "yaml.ansible"],
+      "rootPatterns": ["ansible.cfg", ".git"]
+    },
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "rootPatterns": [".git"]
+    },
+    "docker": {
+      "command": "docker-langserver",
+      "args": ["--stdio"],
+      "filetypes": ["dockerfile"],
+      "rootPatterns": ["Dockerfile", ".git"]
+    },
+    "dockerCompose": {
+      "command": "docker-compose-langserver",
+      "args": ["--stdio"],
+      "filetypes": ["yaml.docker-compose"],
+      "rootPatterns": ["compose.yaml", "compose.yml", "docker-compose.yaml", "docker-compose.yml", ".git"]
+    },
+    "eslint": {
+      "command": "vscode-eslint-language-server",
+      "args": ["--stdio"],
+      "filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact", "vue"],
+      "rootPatterns": ["eslint.config.js", "eslint.config.mjs", ".eslintrc", ".git"]
+    },
+    "gopls": {
+      "command": "gopls",
+      "filetypes": ["go", "gomod", "gowork", "gotmpl"],
+      "rootPatterns": ["go.work", "go.mod", ".git"]
+    },
+    "helm": {
+      "command": "helm_ls",
+      "args": ["serve"],
+      "filetypes": ["helm"],
+      "rootPatterns": ["Chart.yaml", ".git"]
+    },
+    "json": {
+      "command": "vscode-json-language-server",
+      "args": ["--stdio"],
+      "filetypes": ["json", "jsonc"],
+      "rootPatterns": ["package.json", ".git"]
+    },
+    "lua": {
+      "command": "lua-language-server",
+      "filetypes": ["lua"],
+      "rootPatterns": [".luarc.json", ".luarc.jsonc", ".git"]
+    },
+    "markdown": {
+      "command": "marksman",
+      "args": ["server"],
+      "filetypes": ["markdown"],
+      "rootPatterns": [".marksman.toml", ".git"]
+    },
+    "pyright": {
+      "command": "pyright-langserver",
+      "args": ["--stdio"],
+      "filetypes": ["python"],
+      "rootPatterns": ["pyproject.toml", "setup.py", "requirements.txt", ".git"]
+    },
+    "ruff": {
+      "command": "ruff",
+      "args": ["server"],
+      "filetypes": ["python"],
+      "rootPatterns": ["pyproject.toml", "ruff.toml", ".git"]
+    },
+    "taplo": {
+      "command": "taplo",
+      "args": ["lsp", "stdio"],
+      "filetypes": ["toml"],
+      "rootPatterns": ["taplo.toml", ".git"]
+    },
+    "terraform": {
+      "command": "terraform-ls",
+      "args": ["serve"],
+      "filetypes": ["terraform", "hcl"],
+      "rootPatterns": [".terraform", ".git"]
+    },
+    "typescript": {
+      "command": "vtsls",
+      "args": ["--stdio"],
+      "filetypes": ["javascript", "javascriptreact", "typescript", "typescriptreact", "vue"],
+      "rootPatterns": ["package.json", "tsconfig.json", "jsconfig.json", ".git"]
+    },
+    "yaml": {
+      "command": "yaml-language-server",
+      "args": ["--stdio"],
+      "filetypes": ["yaml", "yaml.github-actions", "yaml.ansible"],
+      "rootPatterns": [".git"]
+    }
+  }
+}
