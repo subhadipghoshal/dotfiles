@@ -56,8 +56,26 @@ export GOPATH="$HOME/go"
 export GOBIN="$GOPATH/bin"
 export PATH="$PATH:$GOBIN"
 
-# Added by `rbenv init` on Fri Dec 26 23:42:32 IST 2025
-eval "$(rbenv init - --no-rehash zsh)"
+# rbenv: shims on PATH statically instead of `eval "$(rbenv init -)"`.
+# Measured in the sandbox, median-of-10 startup: 300 ms with the eval, 260 ms
+# without it. (The 140 ms figure previously recorded in ~/.zsh/README.md was
+# the cost of running `rbenv init` as its own process, not its marginal cost
+# inside startup.) The eval emits exactly 16 lines: the shims PATH entry,
+# RBENV_SHELL, and a dispatch function — none needed until `rbenv` is run.
+# `ruby` and `gem` resolve through the shims with no init, and Ruby is
+# near-unused here: 1 `ruby` in 6,950 recorded commands.
+#
+# NOTE: .zshrc prepends /opt/homebrew/bin after this file runs, so the shims
+# sit behind Homebrew and `ruby` resolves to /opt/homebrew/bin/ruby either
+# way. That is pre-existing and unchanged by this block.
+export RBENV_ROOT="$HOME/.rbenv"
+export PATH="$RBENV_ROOT/shims:$PATH"
+
+rbenv() {
+  unset -f rbenv
+  eval "$(command rbenv init - --no-rehash zsh)"
+  rbenv "$@"
+}
 
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=(/Users/subhadip/.docker/completions $fpath)
