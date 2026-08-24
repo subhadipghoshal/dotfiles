@@ -1,0 +1,67 @@
+tmux cheat sheet — prefix is C-a
+(this is a plain static file, not generated — update it by hand when you add
+or change a binding in conf/bindings.conf. full raw dump of every binding,
+including tmux's own defaults and plugin bindings: `tmux list-keys` from a
+shell, or prefix + ? inside tmux.)
+
+SESSIONS & PROJECTS
+  prefix f          jump to a project (fzf) — creates the session if new
+  prefix s          switch between already-open sessions (fzf)
+  prefix d          detach from session
+  prefix X          kill current session (confirms)
+  prefix (  / )     previous / next session
+
+WINDOWS
+  prefix c          new window (opens in the current pane's directory)
+  prefix n  / p     next / previous window
+  prefix l          jump to last active window (alt-tab style)
+  prefix 1-9        jump to window by number
+  prefix w          interactive window tree picker
+  prefix ,          rename window
+  prefix &          kill window
+  Alt+1-9           instant window jump, no prefix needed
+  Alt+h  / Alt+l    cycle to previous / next window, no prefix needed
+
+PANES
+  prefix |          split horizontal (side by side) - also fires if Ctrl is
+                    still held down when you press it
+  prefix -          split vertical (stacked) - also fires if Ctrl is still
+                    held down when you press it
+  prefix z          zoom toggle
+  prefix H/J/K/L    resize pane (repeatable, hold direction)
+  prefix x          kill pane (confirms)
+  prefix b          toggle broadcast/sync-panes — same keystrokes to every
+                    pane in the window (status bar shows SYNC while active)
+  Ctrl+h/j/k/l      navigate panes — and Neovim splits, seamlessly
+
+COPY MODE & CLIPBOARD
+  prefix [          enter copy mode
+  v                 begin selection (inside copy mode)
+  y                 yank selection to clipboard — pbcopy locally, OSC 52
+                    over ssh so it still lands on your Mac
+  prefix ]          paste
+
+POPUPS & TOOLS
+  prefix g          lazygit
+  prefix Space      scratch terminal session
+  prefix o          pick a URL from this pane's scrollback (fzf) and open it
+  prefix T          show / hide the status bar
+  prefix t          flip status bar top / bottom (this session only — edit
+                    status-position in conf/status.conf to change the default)
+  prefix h          this cheat sheet
+
+NESTED TMUX (SSH into a box that's also running tmux)
+  C-a C-a           send one literal prefix keystroke through to the inner
+                    session (built-in double-tap passthrough)
+  F12               toggle passthrough mode for extended work inside the
+                    inner session — dims the status bar while active
+
+PLUGINS (TPM)
+  prefix I          install plugins
+  prefix U          update plugins
+  prefix Alt+u      uninstall plugins no longer declared
+
+MISC
+  prefix r          reload config
+  prefix :          command prompt
+  prefix ?          raw list of every binding (tmux's own default, unfiltered)
