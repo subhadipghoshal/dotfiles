@@ -28,7 +28,17 @@ fi
 selected_name=$(basename "$selected" | tr '.:' '__')
 
 if ! command tmux has-session -t="$selected_name" 2>/dev/null; then
-  command tmux new-session -ds "$selected_name" -c "$selected"
+  # A tmux server may have been started from an agent shell. These explicit
+  # values make a newly created human session override stale server markers.
+  session_env=(
+    -e 'ZSH_AGENT_MODE=0'
+    -e 'CLAUDECODE='
+    -e 'CI='
+    -e 'CODEX_SANDBOX='
+    -e 'CURSOR_AGENT='
+    -e 'OPENCODE='
+  )
+  command tmux new-session -ds "$selected_name" "${session_env[@]}" -c "$selected"
 fi
 
 if [ -n "${TMUX:-}" ]; then
