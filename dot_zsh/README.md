@@ -21,7 +21,7 @@ that actually earn their keep (the git and kubectl aliases, `lsa`, `md`, the
 20-git.zsh           wt (worktrees), gctx (repo context)
 30-find.zsh          f, fe, fdir, fcd, s
 40-man.zsh           mh, manx, mopt, mans
-50-ai.zsh            agent, ctx, fix, fails, worked
+50-ai.zsh            agent, ctx, fix, fails, worked, keys
 60-vi.zsh            cursor shapes, text objects, surround, keymap repairs
 65-adhd.zsh          adhd, adhd-on, adhd-off
 70-aliases.zsh       aliases, safe_clean, loadenv
@@ -69,6 +69,7 @@ before being promoted.
 | `ctx` | `gctx` plus what you have actually run in this directory, with exit codes |
 | `fix` | last failing command + captured terminal output, formatted for an agent |
 | `agent <name> [branch]` | launch claude/codex/opencode/cursor-agent, optionally isolated in a worktree |
+| `keys [NAME...]` | export agent API keys from the `pass` store into this shell only, on demand |
 | `deagent` | clear a stuck CLAUDECODE/CODEX_SANDBOX/CURSOR_AGENT/OPENCODE/ZSH_AGENT_MODE marker and reload — for a tmux pane that inherited one and is wrongly treated as an agent shell |
 
 ## Decisions worth knowing
@@ -153,18 +154,30 @@ session-local human override and reload the login shell.
 
 ## Still open
 
-- **`rbenv init` costs 140 ms — nearly half of the ~300 ms startup**, measured
-  today as the median of 5 runs. It is the single largest cost in this config by
-  a wide margin (`atuin init` is 10 ms, `brew shellenv` 10 ms, `fzf --zsh`,
-  `zoxide init` and `goenv init` all under 5 ms). And Ruby is essentially unused
-  here: across 6,950 recorded commands, `ruby` appears once, `rbenv` 8 times,
-  and `gem` / `bundle` / `rails` / `rake` / `irb` zero times.
-  The fix is to drop `eval "$(rbenv init ...)"` from `.zprofile`, put
-  `$RBENV_ROOT/shims` on PATH statically (which is all `ruby`/`gem` need), and
-  lazy-define the `rbenv` function on first call. Not done — out of scope for
-  the approved plan, but it is the obvious next win.
-- gcloud is sourced from `~/Downloads/google-cloud-sdk/` — works, but
-  `~/Downloads` is a directory people empty.
-- Local API keys are now `0600`, but the `pass` store is still empty and
-  `~/.config/direnv/lib/pass.sh` (a good `pass_export` helper) is still unused —
-  no `.envrc` exists in any project directory.
+- **The `pass` store does not exist yet.** `pass` and `gpg` are installed and
+  the GPG key `29434942FA84957FF31E18BB9499547C00A1A01A` is ready, so this is
+  one `pass init` away. `keys` (50-ai.zsh) reads `ANTHROPIC_KEY` and `OPENCODE_ZEN_KEY` from
+  `agents/anthropic` and `agents/opencode-zen`. Until those two entries exist it
+  fails closed with the command to create them. `~/.secrets/keys` is still the
+  only copy of both values — delete it only after `keys` works.
+- **rbenv is effectively bypassed.** `.zshrc` prepends `/opt/homebrew/bin`
+  *after* `.zprofile` runs, so the rbenv shims sit at PATH position 9 and
+  `ruby` resolves to Homebrew's 4.0.6, not rbenv's 4.0.0. This predates the
+  lazy-loading change and is unchanged by it. Either move the shims after the
+  Homebrew prepend or drop rbenv entirely — with 1 `ruby` invocation in 6,950
+  commands, the second is probably right.
+- `~/.aitk` is 1.9 GB. Unrelated to the shell; listed here only so it is not
+  forgotten.
+
+## Recently closed
+
+- **rbenv no longer eval-ed at login.** Shims go on PATH statically and the
+  dispatch function is defined on first call. Sandbox median-of-10 startup:
+  **300 ms → 260 ms**. The previously recorded "140 ms" was the cost of running
+  `rbenv init` as a standalone process, not its marginal cost inside startup —
+  the real saving is ~40 ms.
+- **gcloud moved out of `~/Downloads`** to `~/.local/share/google-cloud-sdk`.
+  Auth was unaffected; it lives in `~/.config/gcloud`, which is unmanaged. (The
+  store there was empty anyway — no account has ever been authenticated.)
+- **`~/.config/direnv/lib/pass.sh` is now tracked.** It was untracked and not in
+  `.chezmoiignore`, so a fresh checkout would have lost it.
