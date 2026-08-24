@@ -166,8 +166,6 @@ session-local human override and reload the login shell.
   lazy-loading change and is unchanged by it. Either move the shims after the
   Homebrew prepend or drop rbenv entirely — with 1 `ruby` invocation in 6,950
   commands, the second is probably right.
-- `~/.aitk` is 1.9 GB. Unrelated to the shell; listed here only so it is not
-  forgotten.
 
 ## Recently closed
 
@@ -179,5 +177,10 @@ session-local human override and reload the login shell.
 - **gcloud moved out of `~/Downloads`** to `~/.local/share/google-cloud-sdk`.
   Auth was unaffected; it lives in `~/.config/gcloud`, which is unmanaged. (The
   store there was empty anyway — no account has ever been authenticated.)
+- **The Microsoft AI Toolkit is gone**, reclaiming 2.0 GB. It was uninstalled
+  through VS Code (`code --uninstall-extension`) rather than by deleting files,
+  because Settings Sync had silently restored it after the Aug 7 reinstall and
+  would have done so again. `~/.aitk` and the extension folder are deleted and
+  `lastSyncextensions.json` no longer lists it.
 - **`~/.config/direnv/lib/pass.sh` is now tracked.** It was untracked and not in
   `.chezmoiignore`, so a fresh checkout would have lost it.
