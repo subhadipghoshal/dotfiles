@@ -159,3 +159,59 @@ worked() {
   atuin search --exclude-exit 1 --cwd "$PWD" --limit 30 \
     --format '{exit}  {command}' -- "$1" 2>/dev/null
 }
+
+# ── Credentials ───────────────────────────────────────────────────────────
+# keys [NAME...]   export agent API keys from the pass store into this shell.
+#                  With no arguments, exports every key in the table below.
+#
+# Why on demand rather than at login: these are long-lived credentials, and a
+# shell that exports them unconditionally hands them to every child process —
+# including every agent, whether it needs them or not. Calling `keys` is the
+# moment of consent, and it is per-shell.
+#
+# Why pass rather than the old ~/.secrets/keys: that file held them in
+# plaintext, and `loadenv` (70-aliases.zsh) exports whatever it is pointed at
+# with no integrity check. pass keeps them GPG-encrypted at rest.
+#
+# Deliberately NOT a direnv/.envrc setup: these two are global agent
+# credentials used from any directory, not project-scoped secrets. For a
+# genuinely per-project secret, use pass_export in ~/.config/direnv/lib/pass.sh.
+typeset -gA ZSH_AGENT_KEYS=(
+  ANTHROPIC_KEY     agents/anthropic
+  OPENCODE_ZEN_KEY  agents/opencode-zen
+)
+
+keys() {
+  emulate -L zsh
+  (( $+commands[pass] )) || { print -u2 "keys: pass is not installed — brew install pass"; return 1 }
+
+  local store=${PASSWORD_STORE_DIR:-$HOME/.password-store}
+  [[ -d $store ]] || {
+    print -u2 "keys: no pass store at $store"
+    print -u2 "      initialise it with:  pass init <your-gpg-key-id>"
+    return 1
+  }
+
+  local -a wanted
+  if (( $# )); then wanted=( "$@" ); else wanted=( ${(k)ZSH_AGENT_KEYS} ); fi
+
+  local name entry value failed=0
+  for name in $wanted; do
+    entry=${ZSH_AGENT_KEYS[$name]}
+    [[ -n $entry ]] || { print -u2 "keys: unknown key '$name'"; failed=1; continue }
+
+    # First line only: pass entries conventionally carry the secret on line 1
+    # and free-form notes below it.
+    value=$(pass show "$entry" 2>/dev/null | head -1)
+    [[ -n $value ]] || {
+      print -u2 "keys: '$entry' missing or empty — add it with:  pass insert $entry"
+      failed=1
+      continue
+    }
+
+    export "$name=$value"
+    print "keys: exported $name"
+  done
+
+  return $failed
+}
