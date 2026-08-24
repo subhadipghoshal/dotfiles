@@ -150,3 +150,12 @@ spending a context window on it. Reach for them instead of `man <page>`.
 - Atuin records exit codes only from 2026-08-23 onward; the 6,950 commands
   imported from `~/.zsh_history` all carry `exit = -1` (unknown), because a
   plain zsh history file never stored exit status.
+
+## ADHD output mode
+
+If your config directory contains an `.i-have-adhd-always` flag — check
+`~/.claude/`, `~/.codex/`, `~/.gemini/`, or `~/.config/opencode/` for the one
+matching the harness you are running in — read
+`~/.agents/skills/i-have-adhd/SKILL.md` and follow it for every response until
+the reader says "stop adhd mode". Skip this if the ruleset is already present
+in your context (harnesses with hooks or plugins inject it themselves).

@@ -23,6 +23,7 @@ that actually earn their keep (the git and kubectl aliases, `lsa`, `md`, the
 40-man.zsh           mh, manx, mopt, mans
 50-ai.zsh            agent, ctx, fix, fails, worked
 60-vi.zsh            cursor shapes, text objects, surround, keymap repairs
+65-adhd.zsh          adhd, adhd-on, adhd-off
 70-aliases.zsh       aliases, safe_clean, loadenv
 80-cat.zsh           bat wrappers: copycat, pcat, jsoncat
 99-agent-guard.zsh   overrides for agent / non-interactive shells
