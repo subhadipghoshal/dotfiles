@@ -1,0 +1,7 @@
+sourceDir = "~/.dotfiles"
+
+[git]
+    autoPush = true
+
+[diff]
+    pager = "delta"
