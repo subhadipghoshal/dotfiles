@@ -20,6 +20,12 @@
     name = Subhadip Ghoshal
     email = sghoshal.tech@gmail.com
 
+[commit]
+    gpgsign = true
+
+[include]
+    path = ~/.gitconfig.local
+
 [pull]
     rebase = true
 
