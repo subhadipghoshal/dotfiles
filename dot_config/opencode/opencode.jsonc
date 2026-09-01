@@ -1,7 +1,8 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "lsp": true,
   "instructions": [
-    "https://raw.githubusercontent.com/JRedeker/opencode-shell-strategy/trunk/shell_strategy.md"
+    "https://raw.githubusercontent.com/JRedeker/opencode-shell-strategy/trunk/shell_strategy.md",
   ],
   "plugin": [
     "opencode-openai-codex-auth",
@@ -16,6 +17,6 @@
     "opencode-websearch-cited",
     "openqueue",
     "opencode-supermemory",
-    "opencode-notify"
-  ]
+    "opencode-notify",
+  ],
 }
