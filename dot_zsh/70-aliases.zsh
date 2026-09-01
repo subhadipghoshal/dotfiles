@@ -9,6 +9,7 @@ alias cat=bat
 alias ls="eza --icons=always"
 alias v=vim
 alias vim=nvim
+alias v=vim
 
 alias krr="kubectl rollout restart"
 

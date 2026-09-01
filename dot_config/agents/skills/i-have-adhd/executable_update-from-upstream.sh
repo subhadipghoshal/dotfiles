@@ -66,3 +66,9 @@ fi
 
 mv "$new" "$skill"
 echo "Updated SKILL.md body from $ref. Frontmatter kept."
+
+# The always-on block in ~/.config/agents/AGENTS.md is a copy of this body,
+# so refresh it whenever the body changes.
+if [ -x "$skill_dir/sync-always-on.sh" ]; then
+	"$skill_dir/sync-always-on.sh" sync
+fi

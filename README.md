@@ -12,6 +12,7 @@ encoding (`dot_zshrc` → `~/.zshrc`, `private_` → mode 0700,
 |---|---|---|
 | `dot_zshrc`, `dot_zshenv`, `dot_zprofile` | `~/.zshrc` etc. | zsh bootstrap |
 | `dot_zsh/` | `~/.zsh/` | zsh modules, one concern per file, loaded by a glob loop |
+| `dot_zfunc/` | `~/.zfunc/` | hand-written completion functions, autoloaded from `fpath` |
 | `dot_p10k.zsh` | `~/.p10k.zsh` | powerlevel10k prompt |
 | `dot_config/nvim/` | `~/.config/nvim/` | LazyVim-based neovim config |
 | `dot_config/tmux/` | `~/.config/tmux/` | tmux config, split into `conf/` + `scripts/` |

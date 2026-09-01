@@ -59,7 +59,7 @@ ZSH_AUTOSUGGEST_USE_ASYNC=1
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
 #
-# fzf-tab must load AFTER compinit (oh-my-zsh runs it at line 129) and BEFORE
+# fzf-tab must load AFTER compinit (oh-my-zsh runs it at line 134) and BEFORE
 # any plugin that wraps ZLE widgets — zsh-autosuggestions and F-Sy-H both do.
 # Its position in this array is load-bearing; do not sort this list.
 plugins=(
@@ -128,21 +128,29 @@ command -v zoxide >/dev/null && eval "$(zoxide init zsh)"
 export GOENV_DISABLE_GOPATH=1
 command -v goenv >/dev/null && eval "$(goenv init -)"
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/subhadip/.local/share/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/subhadip/.local/share/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/subhadip/.local/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/subhadip/.local/share/google-cloud-sdk/completion.zsh.inc'; fi
+# Google Cloud SDK, PATH half only. The completion half (completion.zsh.inc)
+# needs bashcompinit and so must run AFTER compinit — it lives in
+# ~/.zsh/10-completion.zsh with the rest of the completion config.
+[ -f "$HOME/.local/share/google-cloud-sdk/path.zsh.inc" ] \
+  && . "$HOME/.local/share/google-cloud-sdk/path.zsh.inc"
 
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
 . "$HOME/.turso/env"
 
-# bun completions
-[ -s "/Users/subhadip/.bun/_bun" ] && source "/Users/subhadip/.bun/_bun"
+# bun, openclaw and hermes completions are NOT sourced here. All three ship
+# #compdef-tagged scripts, which is the format compinit indexes on fpath and zsh
+# autoloads on first Tab, so openclaw and hermes are ~/.zfunc/_openclaw and
+# ~/.zfunc/_hermes. bun needs nothing at all: Homebrew installs it and already
+# ships a current _bun in its site-functions, which the line that used to be
+# here shadowed with a stale copy from ~/.bun. Interleaved A/B, median of 15:
+# 610 ms per shell start with those lines, 210 ms without.
 
-export PATH="/Users/subhadip/.local/bin:$PATH"
+# Prepends ~/.local/bin AHEAD of /opt/homebrew/bin from the PATH line at the top
+# of this file: `typeset -U path` keeps the first occurrence, and this line puts
+# it first. That precedence is deliberate — do not "deduplicate" it away.
+export PATH="$HOME/.local/bin:$PATH"
 
 # >>> portable-secrets >>>
 # Shell integration only; secret values stay in pass and project .envrc files.
@@ -157,7 +165,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/subhadip/.lmstudio/bin"
+export PATH="$PATH:$HOME/.lmstudio/bin"
 # End of LM Studio CLI section
 
 # PATH is deduplicated automatically: `typeset -U path PATH` in ~/.zshenv is

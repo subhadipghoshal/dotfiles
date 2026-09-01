@@ -1,35 +1,47 @@
 #!/usr/bin/env sh
-# SessionStart hook: injects the full i-have-adhd ruleset when the user has
-# opted in by creating $CLAUDE_CONFIG_DIR/.i-have-adhd-always (default ~/.claude).
+# SessionStart hook: Claude Code's half of always-on.
 # Never blocks session start: any failure exits 0.
 #
-# Adapted from hooks/always-on.sh in ayghri/i-have-adhd v0.2.0. Only change:
-# SKILL.md resolves to the canonical copy in ~/.config/agents/skills/ instead of a
-# path relative to a plugin install.
+# The ruleset itself now lives in a managed block inside
+# ~/.config/agents/AGENTS.md, which every harness here loads (see
+# sync-always-on.sh). Claude reads it through ~/.claude/CLAUDE.md, so this hook
+# normally prints the banner only and re-syncs the block in the background.
+#
+# It falls back to printing the full ruleset when the block was not in the
+# context Claude just loaded: the first session after turning always-on on, a
+# CLAUDE.md that no longer imports the shared policy, or an unwritable
+# AGENTS.md.
 
-claude_dir="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
-flag_path="$claude_dir/.i-have-adhd-always"
+script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" 2>/dev/null && pwd) || exit 0
+sync=$script_dir/sync-always-on.sh
+[ -x "$sync" ] || exit 0
 
 # Only fire when the user has opted in.
-[ -f "$flag_path" ] || exit 0
+sh "$sync" is-on 2>/dev/null || exit 0
 
-skill_path="$HOME/.config/agents/skills/i-have-adhd/SKILL.md"
-[ -f "$skill_path" ] || exit 0
+claude_dir="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
+config_home="${XDG_CONFIG_HOME:-$HOME/.config}"
 
-# Strip a leading YAML frontmatter block (--- ... --- at the very top of file).
-# An unterminated fence is not frontmatter, so the whole file is kept unless the
-# closing delimiter exists (two passes; matches upstream's Node hook).
-body=$(awk '
-  NR == FNR {
-    if (NR == 1 && $0 ~ /^---[[:space:]]*$/) { in_fm = 1; next }
-    if (in_fm && $0 ~ /^---[[:space:]]*$/)   { in_fm = 0; closed = 1 }
-    next
-  }
-  FNR == 1 { strip = closed }
-  strip && FNR == 1 && $0 ~ /^---[[:space:]]*$/ { skipping = 1; next }
-  skipping && $0 ~ /^---[[:space:]]*$/          { skipping = 0; next }
-  !skipping { print }
-' "$skill_path" "$skill_path") || exit 0
+# Did this session already load the ruleset through the shared policy file?
+in_context=0
+if sh "$sync" block-present 2>/dev/null &&
+	grep -q 'agents/AGENTS.md' "$claude_dir/CLAUDE.md" 2>/dev/null; then
+	in_context=1
+fi
 
-printf 'ADHD MODE ACTIVE (always-on). The ruleset below applies to every response. "stop adhd mode" turns it off for this session; delete %s to turn always-on off for good.\n\n%s\n' \
-  "$flag_path" "$body"
+# Keep the block in step with the flag and with SKILL.md. Takes effect in the
+# next session; this one is covered by the fallback below.
+sh "$sync" sync >/dev/null 2>&1
+
+banner=$(printf 'ADHD MODE ACTIVE (always-on, every harness). The ruleset applies to every response. "stop adhd mode" turns it off for this session; `%s off` turns always-on off for good.' "$sync")
+
+if [ "$in_context" -eq 1 ]; then
+	printf '%s The full rules are already in context via %s.\n' \
+		"$banner" "$config_home/agents/AGENTS.md"
+	exit 0
+fi
+
+body=$(sh "$sync" body 2>/dev/null) || exit 0
+[ -n "$body" ] || exit 0
+printf '%s\n\n%s\n' "$banner" "$body"
+exit 0

@@ -1,0 +1,32 @@
+// Baseline markdownlint rules for every markdown buffer.
+//
+// Why this file lives in the nvim repo and is passed with an explicit
+// --config (see lua/plugins/markdown.lua):
+//
+//   markdownlint-cli2 never resolves a config file above the process CWD, and
+//   nvim-lint pipes the buffer over stdin, which has no file location at all.
+//   A copy at $HOME therefore loads only when Neovim's CWD happens to be
+//   $HOME, which it almost never is. Passing --config explicitly is the only
+//   CWD-independent way to get a machine-wide baseline.
+//
+// A repo that ships its own .markdownlint.{json,jsonc,yaml,yml} or
+// .markdownlint-cli2.* still wins: the resolver prefers the nearest project
+// config and only falls back to this file.
+{
+  // Line length: fires on every prose paragraph. Wrapping is prettier's job.
+  "MD013": false,
+  // Single H1: the publish vault uses repeated H1 sections by design
+  // (# Context / # Problem / # Architecture).
+  "MD025": false,
+  // Inline HTML: <details>, <br> and <img> are legitimate in GFM.
+  "MD033": false,
+  // First line must be a heading: false on every YAML-frontmatter file.
+  "MD041": false,
+  // Emphasis used as a heading: false-positives on bolded lead-ins.
+  "MD036": false,
+  // Table pipe padding: prettier owns table formatting and disagrees.
+  "MD060": false,
+  // Duplicate headings are fine across sections, not within one.
+  "MD024": { "siblings_only": true },
+  "MD046": { "style": "fenced" }
+}

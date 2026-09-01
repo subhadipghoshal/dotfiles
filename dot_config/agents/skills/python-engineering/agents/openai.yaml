@@ -1,0 +1,4 @@
+interface:
+  display_name: "Python Engineering"
+  short_description: "Write idiomatic, maintainable Python code"
+  default_prompt: "Use $python-engineering to implement this Python change idiomatically."

@@ -1,0 +1,29 @@
+#compdef hermes
+# Lazy loader for the hermes CLI completion.
+#
+# `hermes completion zsh` forks the binary and prints 585 lines. The documented
+# `eval "$(hermes completion zsh)"` in .zshrc paid that on every interactive
+# shell start: measured at 175.7 ms, the single most expensive line in the
+# config. Autoloading it instead moves the fork to the first Tab after `hermes `.
+#
+# Generating at completion time rather than caching a snapshot means a hermes
+# upgrade needs no regeneration step here. The generated code defines _hermes,
+# which replaces this stub, so the fork happens once per shell, not once per Tab.
+#
+# Lives in ~/.zfunc, on fpath via the fpath=() block in ~/.zshenv.
+
+(( $+commands[hermes] )) || return 1
+
+# The vendor contract is unpinned by design, so verify it held. If the eval does
+# not replace _hermes — subcommand renamed, output empty, non-zero exit — then
+# calling _hermes below re-enters this same autoloaded stub and forks the binary
+# again at every level until FUNCNEST. Comparing the body before against after is
+# exactly the invariant that matters: did the eval actually replace us?
+local _hermes_stub="$functions[_hermes]"
+eval "$(hermes completion zsh 2>/dev/null)"
+if [[ "$functions[_hermes]" == "$_hermes_stub" ]]; then
+  _message -r '`hermes completion zsh` no longer defines _hermes; ~/.zfunc/_hermes needs updating'
+  return 1
+fi
+
+_hermes "$@"

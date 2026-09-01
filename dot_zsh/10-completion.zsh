@@ -2,7 +2,8 @@
 #
 # Loaded after oh-my-zsh, so every zstyle here overrides the ones oh-my-zsh set
 # in lib/completion.zsh. compinit has already run by this point (oh-my-zsh.sh
-# line 129, well before it sources plugins at line 205), which is also why
+# line 134 — the ZSH_DISABLE_COMPFIX branch; 129 is the one not taken here —
+# well before it sources plugins at line 205), which is also why
 # fzf-tab can live in the plugins=() array at all.
 
 # ── Presentation ──────────────────────────────────────────────────────────
@@ -81,3 +82,29 @@ zstyle ':fzf-tab:complete:(export|unset|printenv|echo):parameter' \
 # Allow `docker run -it` style stacked short flags to complete.
 zstyle ':completion:*:*:docker:*'   option-stacking yes
 zstyle ':completion:*:*:docker-*:*' option-stacking yes
+
+# ── Vendor completions ────────────────────────────────────────────────────
+# Only completions that CANNOT be autoloaded belong in this file. Anything that
+# ships a #compdef-tagged script goes on fpath instead — ~/.zfunc, or the
+# tool's own site-functions directory — where compinit indexes it and zsh loads
+# it on first Tab for nothing. That is where claude, fastapi, openclaw and
+# hermes live, and where Homebrew already puts bun and Docker Desktop _docker.
+#
+# gcloud is the exception that earns a line here: completion.zsh.inc registers
+# BASH completion functions through bashcompinit, so it must run after compinit
+# instead of being autoloaded by it. This module is sourced from .zshrc after
+# oh-my-zsh, which is where compinit ran, so this is the earliest correct spot.
+if [ -f "$HOME/.local/share/google-cloud-sdk/completion.zsh.inc" ]; then
+  . "$HOME/.local/share/google-cloud-sdk/completion.zsh.inc"
+fi
+
+# bun ships its completion in Homebrew's site-functions, but as a "source me"
+# file ending in `compdef _bun bun`, so autoloading it spends the first Tab
+# registering and completes nothing until the second. ~/.zfunc/_bun_delegate
+# sources it and calls it, which makes one Tab enough. It is registered by name
+# here rather than by fpath order because nothing may precede Homebrew's entry
+# on fpath -- see ~/.zshenv.
+if [[ -r "$HOME/.zfunc/_bun_delegate" ]]; then
+  autoload -Uz _bun_delegate
+  compdef _bun_delegate bun
+fi

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Quick"
+  short_description: "Drop reasoning effort to low for mechanical edits and single-file lookups"
+  default_prompt: "Use $quick to execute this turn directly at low reasoning effort."

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": [
+    "https://raw.githubusercontent.com/JRedeker/opencode-shell-strategy/trunk/shell_strategy.md"
+  ],
+  "plugin": [
+    "opencode-openai-codex-auth",
+    "opencode-vibeguard",
+    "opencode-antigravity-auth",
+    "opencode-model-router",
+    "@tarquinen/opencode-dcp",
+    "opencode-pty",
+    "@plannotator/opencode",
+    "opencode-goal-plugin",
+    "@zenobius/opencode-skillful",
+    "opencode-websearch-cited",
+    "openqueue",
+    "opencode-supermemory",
+    "opencode-notify"
+  ]
+}

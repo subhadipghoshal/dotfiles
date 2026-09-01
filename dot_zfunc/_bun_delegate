@@ -1,0 +1,30 @@
+# Completion wrapper for bun. NOT #compdef-tagged on purpose: it is registered
+# explicitly by ~/.zsh/10-completion.zsh, because it cannot win by fpath order.
+#
+# bun is a Homebrew install and Homebrew ships a current `_bun` in its
+# site-functions. That file would be enough except for how it ends -- with
+# `compdef _bun bun`, the "source me from .zshrc" idiom rather than the autoload
+# idiom. Autoloaded directly, the first Tab only registers and completes
+# nothing, and the second Tab works. Measured: `bun ru` + one Tab produced
+# nothing, + two Tabs produced `run`.
+#
+# Shadowing it by putting ~/.zfunc earlier on fpath is not an option: nothing
+# may precede Homebrew's entry there, see the note in ~/.zshenv. So this
+# delegates by name instead, sourcing whichever `_bun` the vendor dirs currently
+# hold, which keeps `brew upgrade bun` tracked and costs nothing at shell start.
+
+local _stub="$functions[_bun]" _d _found=
+for _d in $fpath; do
+  if [[ -r $_d/_bun ]]; then
+    source $_d/_bun
+    _found=$_d/_bun
+    break
+  fi
+done
+
+if [[ -z $_found ]] || [[ "$functions[_bun]" == "$_stub" ]]; then
+  _message -r 'no vendor _bun found on fpath'
+  return 1
+fi
+
+_bun "$@"

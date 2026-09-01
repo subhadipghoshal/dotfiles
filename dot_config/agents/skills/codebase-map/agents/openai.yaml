@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codebase Map"
+  short_description: "Map repository structure and feature flows"
+  default_prompt: "Map this repository or feature flow, cite the key files, and identify the next files worth reading."

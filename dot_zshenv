@@ -12,4 +12,58 @@
 # cleanup passes that used to live at the end of .zshrc unnecessary.
 typeset -U path PATH fpath cdpath manpath
 
+# Non-interactive zsh does not read .zprofile or .zshrc, so this is the only
+# startup boundary that can guarantee pager-safe captured commands. A human
+# zero remains local for inspection but must not leak into child processes.
+if [[ ! -o interactive || ! -t 1 ]]; then
+  if [[ ${ZSH_AGENT_MODE:-} == 0 ]]; then
+    typeset +x ZSH_AGENT_MODE
+  fi
+  export PAGER=cat
+  export MANPAGER=cat
+  export GIT_PAGER=cat
+  export DELTA_PAGER=cat
+  export LESS=-FRX
+fi
+
+# Completion search path, declared ABSOLUTELY and read by every zsh.
+#
+# Two separate reasons this is here and in this shape.
+#
+# 1. Not in .zprofile, because only login shells read that. oh-my-zsh writes the
+#    whole fpath array into the compdump as an `#omz fpath: ...` line and
+#    re-checks it with `grep -Fx` on every start (oh-my-zsh.sh:113-122); any
+#    difference at all deletes the dump and costs a cold compinit. While
+#    ~/.docker/completions and ~/.zfunc were declared in .zprofile, a non-login
+#    interactive shell built a 26-entry array against a login shell's 29.
+#
+# 2. Absolute, not `fpath=(new $fpath)`, because `brew shellenv` in .zprofile
+#    emits `export FPATH`. An exported FPATH is inherited by every child shell —
+#    including tmux panes, which take it from the server's environment — and zsh
+#    imports it into fpath BEFORE this file runs. Appending to that inherited
+#    array produced a different, longer one than a clean start did, which is the
+#    same compdump-thrash bug wearing a different hat. Naming the entries
+#    outright makes a clean login shell, a non-login shell, a nested shell and a
+#    tmux pane all agree. (`typeset +x FPATH` does not help: the import has
+#    already happened by then.)
+#
+# The three /usr entries are zsh 5.9's own defaults, reproduced here because the
+# assignment is absolute. The Homebrew prefix is Apple Silicon and hardcoded, as
+# it already is for `brew shellenv` in .zprofile; this file cannot run `brew`
+# without paying a fork in every shell, scripts included.
+# Homebrew's entry must stay FIRST. `brew shellenv` in .zprofile re-inserts it
+# with `fpath[1,0]=`, and on a unique array a slice insert MOVES an existing
+# element to the front rather than duplicating it. While it was already first
+# that re-insert was a no-op; put anything ahead of it and login shells get a
+# different order from non-login ones, which is the compdump-thrash bug again.
+# Measured: moving ~/.zfunc to the front broke the four-way agreement below.
+fpath=(
+  /opt/homebrew/share/zsh/site-functions
+  "$HOME/.docker/completions"
+  /usr/local/share/zsh/site-functions
+  /usr/share/zsh/site-functions
+  "/usr/share/zsh/$ZSH_VERSION/functions"
+  "$HOME/.zfunc"
+)
+
 . "$HOME/.cargo/env"

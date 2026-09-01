@@ -1,0 +1,4 @@
+interface:
+  display_name: "Deep"
+  short_description: "Raise reasoning effort to xhigh for complex debugging and architectural trade-offs"
+  default_prompt: "Use $deep with $complexity-assessment to thoroughly reason through this challenge."

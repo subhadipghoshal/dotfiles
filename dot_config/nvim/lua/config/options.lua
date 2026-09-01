@@ -15,3 +15,9 @@ vim.cmd([[
   cnoreabbrev WQa wqa
   cnoreabbrev WQA wqa
 ]])
+
+-- Spelling: LazyVim turns `spell` on for markdown/text buffers. Keep the
+-- dictionary in the config repo so chezmoi carries it between machines, and
+-- stop flagging the halves of camelCase identifiers as misspellings.
+vim.opt.spellfile = vim.fn.stdpath("config") .. "/spell/en.utf-8.add"
+vim.opt.spelloptions:append("camel")

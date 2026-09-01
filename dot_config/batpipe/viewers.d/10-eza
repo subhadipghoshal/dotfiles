@@ -1,0 +1,5 @@
+# Work around bat-extras 2024.08.24: the eza/exa conditional at batpipe:332 is
+# inverted, so an installed eza never gets used. viewer_eza_supports and
+# viewer_eza_process are already defined by batpipe itself; this only fixes the
+# order of preference.
+BATPIPE_VIEWERS=("eza" "${BATPIPE_VIEWERS[@]}")

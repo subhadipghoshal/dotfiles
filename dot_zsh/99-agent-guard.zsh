@@ -24,19 +24,59 @@
 #
 # Detection cannot key off `[[ ! -t 1 ]]` alone. That is true for Claude Code's
 # pipe-based Bash tool (which does NOT hang) and FALSE under a pty harness
-# (which does). An explicit ZSH_AGENT_MODE=1 covers agent PTYs. Ambient
-# OPENCODE/CI/etc. markers remain a fallback outside tmux, but are deliberately
-# ignored in a human tmux TTY because they can be inherited by the server.
+# (which does). A non-TTY always gets safe behavior. Within a TTY,
+# ZSH_AGENT_MODE is tri-state: 1 means agent, 0 means human, and an unset or
+# invalid value falls back to agent-marker detection. A human 0 remains visible
+# in this shell but is deliberately not exported, so a bare agent child can
+# still identify itself with a real marker.
 
-if [[ ! -t 1 || ${ZSH_AGENT_MODE:-} == 1 \
-      || ( -z ${TMUX:-} && ( -n ${CLAUDECODE:-} || -n ${CI:-} \
-      || -n ${CODEX_SANDBOX:-} || -n ${CURSOR_AGENT:-} || -n ${OPENCODE:-} ) ) ]]; then
+typeset _zsh_agent_guard=0
+typeset _zsh_agent_stdout_tty=0
+if [[ ${ZSH_AGENT_MODE:-} == 0 ]]; then
+  typeset +x ZSH_AGENT_MODE
+fi
+
+if [[ -t 1 ]]; then
+  _zsh_agent_stdout_tty=1
+elif (( ${+__p9k_instant_prompt_active} && ${+__p9k_fd_1} )) \
+     && [[ -t $__p9k_fd_1 ]]; then
+  # Powerlevel10k instant prompt saves the pane's real stdout descriptor, then
+  # redirects fd 1 to a cache file until the first prompt is ready. Classify
+  # against that saved descriptor so a real tmux pane stays human while a
+  # genuinely captured shell remains pager-safe.
+  _zsh_agent_stdout_tty=1
+fi
+
+if (( ! _zsh_agent_stdout_tty )); then
+  _zsh_agent_guard=1
+else
+  case ${ZSH_AGENT_MODE:-} in
+    1)
+      _zsh_agent_guard=1
+      ;;
+    0)
+      ;;
+    *)
+      if [[ -n ${CLAUDECODE:-} || -n ${CI:-} \
+            || -n ${CODEX_SANDBOX:-} || -n ${CURSOR_AGENT:-} \
+            || -n ${OPENCODE:-} ]]; then
+        _zsh_agent_guard=1
+      fi
+      ;;
+  esac
+fi
+
+if (( _zsh_agent_guard )); then
 
   export PAGER=cat
   export MANPAGER=cat
   export GIT_PAGER=cat
   export DELTA_PAGER=cat
   export LESS=-FRX
+
+  # batpipe is a less preprocessor. Nothing should be preprocessing output
+  # that no human is reading.
+  unset LESSOPEN LESSCLOSE BATPIPE
 
   # p10k's instant-prompt warnings land in captured stdout otherwise.
   export POWERLEVEL9K_INSTANT_PROMPT=quiet
@@ -51,17 +91,36 @@ if [[ ! -t 1 || ${ZSH_AGENT_MODE:-} == 1 \
   # Agents should get the real tool, not a wrapper that opens an editor.
   unalias v vim 2>/dev/null
 
-fi
+else
 
-# deagent — clear a stuck agent marker and reload a login shell. If this pane's
+  # A non-login human shell may inherit pager exports from a former agent
+  # parent, so restore the complete interactive state here as well as in
+  # .zprofile.
+  export PAGER=less
+  export MANPAGER="sh -c 'col -bx | bat --theme=default -l man --style=plain --color=always --paging=auto'"
+  unset GIT_PAGER DELTA_PAGER
+
+  # batpipe: teaches `less` to syntax-highlight, and to open directories and
+  # archives (*.tar, *.tar.gz, *.zip, *.jar, *.gz, *.xz). Costs ~40ms per
+  # interactive shell. The eval is regenerated each start on purpose: batpipe
+  # emits a Cellar-versioned path that a static copy would outlive.
+  eval "$(batpipe)"
+  export LESS=-R
+
+fi
+unset _zsh_agent_guard _zsh_agent_stdout_tty
+
+# deagent clears a stuck agent marker and reloads a login shell. If this pane's
 # session inherited ZSH_AGENT_MODE=1 from an older tmux server, a session-local
-# zero prevents the server-wide value from coming back into the new shell.
+# zero prevents the server-wide value from coming back into the new shell. The
+# new login shell consumes the explicit zero and removes its export attribute.
 deagent() {
   local session
   session=$(command tmux display-message -p '#{session_name}' 2>/dev/null) || session=
   if [[ -n $session ]]; then
     command tmux set-environment -t "$session" ZSH_AGENT_MODE=0 2>/dev/null || true
   fi
-  unset CLAUDECODE CI CODEX_SANDBOX CURSOR_AGENT OPENCODE ZSH_AGENT_MODE
+  unset CLAUDECODE CI CODEX_SANDBOX CURSOR_AGENT OPENCODE
+  export ZSH_AGENT_MODE=0
   exec zsh -l
 }

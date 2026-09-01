@@ -1,0 +1,23 @@
+# Inherit the terminal's own 16 ANSI colours. Retheming ghostty rethemes bat,
+# with no config edit and nothing here to drift out of sync. Man pages override
+# this to Monokai in 85-bat-extras.zsh, because ansi gives flags no colour of
+# their own.
+--theme=ansi
+
+# Decorations. bat's default set, stated explicitly so it survives any
+# BAT_STYLE that turns up in the environment. Note batman exports BAT_STYLE=grid
+# (batman:306) when it is unset, which is why stating this matters.
+--style=numbers,changes,header-filename,grid,snip
+
+# ghostty renders italics.
+--italic-text=always
+
+# Collapse runs of blank lines; keeps long configs and logs scannable.
+--squeeze-blank
+
+# Show the filename in the window title while the pager is open.
+--set-terminal-title
+
+# chezmoi source files have no extension and lose highlighting without this.
+--map-syntax="**/chezmoi/dot_z*:Bourne Again Shell (bash)"
+--map-syntax="**/chezmoi/private_dot_z*:Bourne Again Shell (bash)"

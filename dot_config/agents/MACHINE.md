@@ -1,10 +1,10 @@
 # Machine-specific agent context
 
-Last verified 2026-08-24. Read this file when work depends on this machine’s configuration, shell behavior, local commands, or agent-harness setup. Re-check a fact when observed state disagrees with this document.
+Last verified 2026-08-29. Read this file when work depends on this machine’s configuration, shell behavior, local commands, or agent-harness setup. Re-check a fact when observed state disagrees with this document.
 
 ## Host and toolchain
 
-- The host runs macOS 26.5.2 on Apple Silicon (`arm64`). The default shell is `/bin/zsh`.
+- The host runs macOS 26.6.2 on Apple Silicon (`arm64`). The default shell is `/bin/zsh`.
 - Homebrew is installed at `/opt/homebrew/bin/brew`; do not assume Intel Homebrew paths under `/usr/local`.
 - The local timezone is Asia/Kolkata (IST). The home directory is `/Users/subhadip`.
 - `XDG_CONFIG_HOME` is currently unset, so the XDG default is `~/.config`. Agent configuration therefore lives under `~/.config/agents`.
@@ -50,7 +50,11 @@ For a shared skill, update the canonical package first, validate it, then add ch
 
 ## Agent-shell behavior and local commands
 
-`~/.zsh/99-agent-guard.zsh` sets agent pagers to `cat`, disables `correct_all`, and removes the `cat`, `ls`, `tmux`, and `vim` aliases. Do not add `| cat`, `--no-pager`, temporary pager overrides, or change the intentional interactive pager configuration. In agent shells those commands are real binaries; interactively they map to `bat`, `eza`, and `nvim`.
+`~/.zsh/99-agent-guard.zsh` sets agent pagers to `cat`, disables `correct_all`, and removes the `cat`, `ls`, `v`, `vim`, and `tmux` aliases. Do not add `| cat`, `--no-pager`, temporary pager overrides, or change the intentional interactive pager configuration. In agent shells those commands are real binaries; interactively they map to `bat`, `eza`, and `nvim`.
+
+Inside an interactive TTY, `ZSH_AGENT_MODE` is tri-state: `1` selects agent behavior, `0` selects human behavior, and an unset or invalid value uses agent-marker detection. Non-interactive and captured shells always use pager-safe behavior. A shell that consumes `0` keeps the value but removes its export attribute so a bare agent child can detect its own marker. Tmux seeds new servers with a global `0` and removes inherited `CLAUDECODE`, `CI`, `CODEX_SANDBOX`, `CURSOR_AGENT`, and `OPENCODE` values before creating the first pane. Use `deagent` to repair a pane that already has stale agent-shell state.
+
+Powerlevel10k instant prompt redirects fd 1 to a cache file while `.zshrc` loads. The agent guard treats Powerlevel10k's saved original stdout descriptor as authoritative during that interval. Removing this check makes warmed-up tmux windows and splits look captured, which strips the human aliases even when `ZSH_AGENT_MODE=0`.
 
 | Command | Purpose |
 |---|---|
@@ -58,9 +62,9 @@ For a shared skill, update the canonical package first, validate it, then add ch
 | `mopt <page> <flag>` | Read one option paragraph |
 | `mh <page>` | List a man page’s section headers |
 | `gctx` | Show compact repository state |
-| `wt <branch>` | Create a sibling worktree and tmux session |
+| `wt <branch>` | Interactively create or open a sibling worktree and tmux session |
 
-Prefer `manx` and `mopt` over a full man page. The `s <pattern>` command is interactive and intended for humans. Use `wt` for parallel agents because agents sharing one working tree can overwrite each other.
+Prefer `manx` and `mopt` over a full man page. The `s <pattern>` and `wt` commands are interactive and intended for humans; `wt` may attach tmux. For agent delegation, use `$git-worktree-delegation`, whose script creates non-interactive sibling worktrees.
 
 ## Hazards and data caveats
 

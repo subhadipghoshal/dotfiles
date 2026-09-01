@@ -17,7 +17,7 @@ that actually earn their keep (the git and kubectl aliases, `lsa`, `md`, the
 
 ```
 00-options.zsh       history sizes, KEYTIMEOUT, setopts, GPG_TTY
-10-completion.zsh    completion zstyles + fzf-tab previews
+10-completion.zsh    completion zstyles + fzf-tab previews + gcloud bashcompinit
 20-git.zsh           wt (worktrees), gctx (repo context)
 30-find.zsh          f, fe, fdir, fcd, s
 40-man.zsh           mh, manx, mopt, mans
@@ -70,7 +70,7 @@ before being promoted.
 | `fix` | last failing command + captured terminal output, formatted for an agent |
 | `agent <name> [branch]` | launch claude/codex/opencode/cursor-agent, optionally isolated in a worktree |
 | `keys [NAME...]` | export agent API keys from the `pass` store into this shell only, on demand |
-| `deagent` | clear a stuck CLAUDECODE/CODEX_SANDBOX/CURSOR_AGENT/OPENCODE/ZSH_AGENT_MODE marker and reload — for a tmux pane that inherited one and is wrongly treated as an agent shell |
+| `deagent` | clear stuck agent markers, set a session-local human override, and reload a tmux pane that was wrongly treated as an agent shell |
 
 ## Decisions worth knowing
 
@@ -79,6 +79,76 @@ by login shells. While the dedupe lived there, typing `zsh` produced a
 differently-hashed `fpath` (4,823 chars vs 1,862), oh-my-zsh compared it against
 the compdump, decided it was stale and **deleted** it — so the next login shell
 paid a cold `compinit` of 213–480 ms. That was the intermittent slow start.
+
+**Vendor completions belong on `fpath`, not in `.zshrc`.** The installers for
+bun, openclaw and hermes each append a `source` or `eval` line to `.zshrc`. All
+three ship `#compdef`-tagged scripts, which is exactly the format `compinit`
+autoloads on first Tab for free, so sourcing them eagerly buys nothing and is
+charged to every shell start: `eval "$(hermes completion zsh)"` forked the
+binary for 175.7 ms and `source ~/.openclaw/completions/openclaw.zsh` parsed
+201 KB for 5.0 ms. Interleaved A/B in the sandbox, median of 15 runs each:
+**610 ms with those two lines, 210 ms without**; floor to floor, 350 ms against
+200 ms. Against the real `.zshrc` as it stood, kept at
+`~/.local/state/agents/migration-backup/`, the live interleaved A/B is
+**660 ms against 380 ms**, median of 12. Interleaving is load-bearing: run
+sequentially the two orderings disagree and can even invert.
+
+`~/.zfunc/_openclaw` and `~/.zfunc/_hermes` are thin loaders rather than copies.
+Each sources the vendor script at completion time and then redefines itself, so
+an `openclaw update` or a hermes upgrade needs no regeneration step here, and
+the load happens once per shell rather than once per Tab. Because that pins
+nothing, `_hermes` checks that the eval actually replaced it and bails with a
+message if not: calling a `_hermes` the eval never defined would re-enter the
+autoloaded stub and fork the binary once per level until `FUNCNEST`, which with
+a 0.12-0.19 s fork is a wedged prompt rather than a failed completion.
+
+Unlike `_claude` and `_fastapi`, which are regenerable vendor output, these two
+are hand-written and **are** tracked in the chezmoi source at `dot_zfunc/`, so a
+`chezmoi init --apply` on a new machine gets them. Without that the failure mode
+is silent: Tab simply does nothing.
+
+bun is a Homebrew install and Homebrew already ships a current `_bun` on
+`fpath`, so the `.zshrc` line was sourcing a stale 1,001-line `~/.bun/_bun` that
+*shadowed* the correct 1,197-line one from the Cellar. Dropping the line alone
+was not enough, though: Homebrew's file also ends in `compdef _bun bun`, so
+autoloading it spends the first Tab registering and completes nothing until the
+second (`bun ru` + one Tab gave nothing, + two Tabs gave `run`). Shadowing it
+from `~/.zfunc` is not available, because nothing may precede Homebrew's entry
+on `fpath` -- see below. So `~/.zfunc/_bun_delegate` sources it and calls it, and
+`10-completion.zsh` registers that by name with `compdef`. One Tab again.
+
+gcloud is the one that stays in `10-completion.zsh`: `completion.zsh.inc`
+registers bash functions through `bashcompinit`, so it has to run after
+`compinit` instead of being autoloaded by it.
+
+**`fpath` is declared in `~/.zshenv`, absolutely, and it took two goes.** The
+entries for `~/.docker/completions`, `~/.zfunc` and Homebrew's `site-functions`
+all arrived through `.zprofile`, which only login shells read. oh-my-zsh writes
+the whole array into the compdump as an `#omz fpath:` line and re-checks it with
+`grep -Fx` on every start (`oh-my-zsh.sh:113-122`), so any difference deletes the
+dump. A non-login interactive shell built 26 entries against a login shell's 29.
+
+Moving the declaration to `.zshenv` fixed that half and exposed the other half.
+`brew shellenv` emits `export FPATH`, so an FPATH is inherited by every child
+shell, and zsh folds it into `fpath` *before* `.zshenv` runs. Writing
+`fpath=(new $fpath)` therefore built a longer array in any shell that inherited
+one than in a clean start — the same bug wearing a different hat, and the case
+that actually bites here, because tmux panes on this machine are login shells
+(`default-command` is empty) and the server's environment carries FPATH. Cold
+against warm start measured 769 ms against 196 ms.
+
+Naming every entry outright settles it: a clean login shell, a non-login shell,
+a nested shell and a tmux pane now produce the same array and the same
+`#omz fpath:` line. `typeset +x FPATH` is not an alternative — by the time
+`.zshenv` could run it, the import has already happened.
+
+One constraint falls out of that and is easy to trip over: **Homebrew's entry
+has to stay first.** `brew shellenv` re-inserts it from `.zprofile` with
+`fpath[1,0]=`, and on a `typeset -U` array a slice insert *moves* an existing
+element to the front rather than duplicating it. While it is already first that
+is a no-op. Put anything ahead of it — `~/.zfunc`, say — and login shells get an
+order non-login shells do not, which is this same bug for the third time. That
+is why bun's wrapper is registered by name instead of by position.
 
 **`KEYTIMEOUT=2`.** Unset means 40, i.e. 400 ms. `ESC` in viins is both a
 complete binding and the prefix of 23 sequences, so zsh waited the full timeout
@@ -116,7 +186,7 @@ ships in `/usr/share/zsh/5.9/functions/` and that `60-vi.zsh` now autoloads.
 **fzf-tab is the one plugin added.** It replaces zsh's completion *menu*, not
 its completion engine, so every zstyle and every plugin-supplied completion
 still applies. Its position in `plugins=()` is load-bearing: after compinit
-(oh-my-zsh runs it at line 129, before sourcing plugins at line 205) and before
+(oh-my-zsh runs it at line 134, before sourcing plugins at line 205) and before
 zsh-autosuggestions and F-Sy-H, which wrap ZLE widgets.
 
 ## Known limitations
@@ -143,14 +213,29 @@ rsync, ssh, fd, ls, grep, rg, find, git-log — including `grep -r`, which BSD
 pages document as `-R, -r, --recursive`. Unusual layouts may still fool it;
 `mh <page>` then `manx <page> <SECTION>` is the reliable fallback.
 
-**Agent markers must not decide human tmux behavior.** `99-agent-guard.zsh`
-uses `ZSH_AGENT_MODE=1` for an agent PTY and `[[ ! -t 1 ]]` for captured
-output. Ambient `CLAUDECODE`/`CODEX_SANDBOX`/`CURSOR_AGENT`/`OPENCODE`/`CI`
-markers remain a fallback outside tmux, but are ignored in a human tmux TTY
-because they can be inherited by the server. `agent()` sets the explicit
-marker only on the agent process, and the tmux sessionizer gives new sessions
-safe marker values. For an existing poisoned session, run `deagent` to set a
-session-local human override and reload the login shell.
+**`ZSH_AGENT_MODE` is a tri-state startup contract inside an interactive
+TTY.** A value of `1` selects agent behavior, `0` selects human behavior, and
+an unset or invalid value falls back to agent-marker detection. Real
+`CLAUDECODE`/`CODEX_SANDBOX`/`CURSOR_AGENT`/`OPENCODE`/`CI` markers are checked
+inside tmux too. A non-interactive or captured shell always gets pager-safe
+behavior; `.zshenv` enforces that for true `zsh -c` calls that never read the
+later startup files. A human shell keeps its `0` value locally but removes the
+export attribute, so a bare agent child does not inherit the override and can
+still select safe behavior from its own marker.
+
+Powerlevel10k instant prompt temporarily redirects stdout while `.zshrc`
+loads. During that interval the guard checks Powerlevel10k's saved original
+stdout descriptor, not the cache-file descriptor currently occupying fd 1.
+This keeps real tmux panes human without weakening captured-shell safety. The
+human branch also restores the complete pager contract on every interactive
+startup: `PAGER=less`, the bat-backed `MANPAGER`, unset Git pager overrides,
+and `LESS=-R` after `batpipe` installs its preprocessor hooks.
+
+At tmux server startup, `conf/options.conf` sets the global mode to `0` and
+removes inherited agent markers before the first pane is created. This covers
+direct `tmux new-session` launches as well as the sessionizer. For an existing
+poisoned pane, run `deagent` to set the session-local human override and reload
+the login shell.
 
 ## Still open
 
@@ -168,6 +253,15 @@ session-local human override and reload the login shell.
   commands, the second is probably right.
 
 ## Recently closed
+
+- **The `.zshrc` tail is bootstrap again.** The bun, openclaw, hermes and gcloud
+  completion lines that installers had appended are gone. The openclaw and
+  hermes blocks had been written *below* `99-agent-guard.zsh`, which has to run
+  last. No hardcoded `/Users/subhadip` is left in `.zshrc`, `.zshenv` or
+  `.zprofile` either. One pass at that had already been attempted live and had
+  put `${HOME}` inside **single** quotes on the two gcloud lines, so the
+  `[ -f ... ]` test could never be true and gcloud PATH and completion had been
+  silently off.
 
 - **rbenv no longer eval-ed at login.** Shims go on PATH statically and the
   dispatch function is defined on first call. Sandbox median-of-10 startup:

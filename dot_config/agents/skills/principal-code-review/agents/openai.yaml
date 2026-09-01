@@ -1,0 +1,4 @@
+interface:
+  display_name: "Principal Code Review"
+  short_description: "Run independent severity-gated code reviews"
+  default_prompt: "Use $principal-code-review to review these code changes independently."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "C# Engineering"
+  short_description: "Write modern, maintainable C# code"
+  default_prompt: "Use $csharp-engineering to implement this C# change idiomatically."

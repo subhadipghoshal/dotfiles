@@ -1,0 +1,4 @@
+interface:
+  display_name: "Apex"
+  short_description: "Maximum reasoning effort for critical sub-problems (User-invoked only)"
+  default_prompt: "Use $apex for maximum-effort reasoning on this critical task."

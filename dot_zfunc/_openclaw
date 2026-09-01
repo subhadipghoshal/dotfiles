@@ -1,0 +1,20 @@
+#compdef openclaw
+# Lazy loader for the openclaw CLI completion.
+#
+# The installer writes ~/.openclaw/completions/openclaw.zsh (201 KB, 5,406
+# lines) and tells you to `source` it from .zshrc. That parsed the whole file on
+# every interactive shell start, measured at 5.0 ms, to define a completion
+# almost no shell ever uses. This file is autoloaded by compinit instead, so the
+# cost moves to the first Tab after `openclaw `.
+#
+# Sourcing the vendor file rather than copying it means an `openclaw update`
+# is picked up with no regeneration step here. The vendor file defines
+# _openclaw_root_completion, not _openclaw, so this redefines itself to
+# delegate; the source therefore runs once per shell, not once per Tab.
+#
+# Lives in ~/.zfunc, on fpath via the fpath=() block in ~/.zshenv.
+
+[[ -r "$HOME/.openclaw/completions/openclaw.zsh" ]] || return 1
+source "$HOME/.openclaw/completions/openclaw.zsh"
+_openclaw() { _openclaw_root_completion "$@" }
+_openclaw "$@"

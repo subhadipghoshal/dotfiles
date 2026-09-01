@@ -1,0 +1,75 @@
+{
+  "Publish article frontmatter": {
+    "prefix": "fmarticle",
+    "body": [
+      "---",
+      "title: ${1:Untitled article}",
+      "slug: ${2:untitled-article}",
+      "description: ${3:Replace this with a concise public summary of the article.}",
+      "type: article",
+      "status: ${4|draft,ready,published|}",
+      "topics: []",
+      "published: false",
+      "newsletter: false",
+      "created: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
+      "updated: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
+      "source_notes: []",
+      "---",
+      "",
+      "$0"
+    ],
+    "description": "Frontmatter matching ~/vaults/publish/templates/article.md"
+  },
+  "Publish project frontmatter": {
+    "prefix": "fmproject",
+    "body": [
+      "---",
+      "title: ${1:Untitled project}",
+      "slug: ${2:untitled-project}",
+      "description: ${3:Replace this with a concise public summary of the project.}",
+      "type: project",
+      "status: ${4|draft,ready,published|}",
+      "topics: []",
+      "published: false",
+      "newsletter: false",
+      "created: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
+      "updated: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
+      "source_notes: []",
+      "featured: false",
+      "---",
+      "",
+      "$0"
+    ],
+    "description": "Frontmatter matching ~/vaults/publish/templates/project.md"
+  },
+  "Source note provenance": {
+    "prefix": "srcnote",
+    "body": ["source_notes:", "  - vault: ${1|personal,work|}", "    file: ${2:Tech/example-research-note.md}"],
+    "description": "Cross-vault provenance entry (see publish/.links/README.md)"
+  },
+  "Callout": {
+    "prefix": "callout",
+    "body": ["> [!${1|NOTE,TIP,IMPORTANT,WARNING,CAUTION|}]", "> $0"],
+    "description": "GitHub / Obsidian callout block"
+  },
+  "Mermaid diagram": {
+    "prefix": "mermaid",
+    "body": ["```mermaid", "${1|graph LR,graph TD,sequenceDiagram,flowchart TD,erDiagram|}", "  $0", "```"],
+    "description": "Mermaid fence (renders inline via snacks.image)"
+  },
+  "Details / summary": {
+    "prefix": "details",
+    "body": ["<details>", "<summary>${1:Summary}</summary>", "", "$0", "", "</details>"],
+    "description": "Collapsible section"
+  },
+  "Table": {
+    "prefix": "table",
+    "body": ["| ${1:Column} | ${2:Column} |", "|---|---|", "| $3 | $4 |", "$0"],
+    "description": "GFM table skeleton"
+  },
+  "Code fence": {
+    "prefix": "fence",
+    "body": ["```${1|sh,lua,python,go,json,yaml,typescript,tsx,hcl,sql,text|}", "$0", "```"],
+    "description": "Fenced code block"
+  }
+}

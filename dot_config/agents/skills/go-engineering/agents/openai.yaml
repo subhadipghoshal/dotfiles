@@ -1,0 +1,4 @@
+interface:
+  display_name: "Go Engineering"
+  short_description: "Write idiomatic, maintainable Go code"
+  default_prompt: "Use $go-engineering to implement this Go change idiomatically."

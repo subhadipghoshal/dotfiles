@@ -1,0 +1,4 @@
+interface:
+  display_name: "Git Worktree Delegation"
+  short_description: "Create isolated worktrees for parallel agents"
+  default_prompt: "Use $git-worktree-delegation to isolate these parallel code changes."

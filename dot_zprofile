@@ -7,13 +7,38 @@
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Created by `pipx` on 2025-10-17 14:38:51
-export PATH="$PATH:/Users/subhadip/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
 
 export VISUAL="nvim"
 
-if [[ -o interactive && -t 1 && ${ZSH_AGENT_MODE:-} != 1 \
-      && ( -n ${TMUX:-} || ( -z ${CLAUDECODE:-} && -z ${CI:-} \
-      && -z ${CODEX_SANDBOX:-} && -z ${CURSOR_AGENT:-} && -z ${OPENCODE:-} ) ) ]]; then
+typeset _zsh_agent_behavior
+if [[ ${ZSH_AGENT_MODE:-} == 0 ]]; then
+  # Keep the override in this shell, but do not pass it to bare agent children.
+  typeset +x ZSH_AGENT_MODE
+fi
+
+if [[ ! -o interactive || ! -t 1 ]]; then
+  _zsh_agent_behavior=agent
+else
+  case ${ZSH_AGENT_MODE:-} in
+    1)
+      _zsh_agent_behavior=agent
+      ;;
+    0)
+      _zsh_agent_behavior=human
+      ;;
+    *)
+      if [[ -n ${CLAUDECODE:-} || -n ${CI:-} || -n ${CODEX_SANDBOX:-} \
+            || -n ${CURSOR_AGENT:-} || -n ${OPENCODE:-} ]]; then
+        _zsh_agent_behavior=agent
+      else
+        _zsh_agent_behavior=human
+      fi
+      ;;
+  esac
+fi
+
+if [[ $_zsh_agent_behavior == human ]]; then
   export PAGER=less
   export MANPAGER="sh -c 'col -bx | bat --theme=default -l man --style=plain --color=always --paging=auto'"
   unset GIT_PAGER DELTA_PAGER
@@ -25,6 +50,7 @@ else
   export DELTA_PAGER=cat
   export LESS=-FRX
 fi
+unset _zsh_agent_behavior
 export CFLAGS="-I/opt/homebrew/include -I/opt/homebrew/include/SDL2"
 # /opt/homebrew/lib/cmake and .../pkgconfig contain zero .dylib/.a files —
 # verified — so passing them to every link was pure noise.
@@ -77,27 +103,24 @@ rbenv() {
   rbenv "$@"
 }
 
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/subhadip/.docker/completions $fpath)
+# Docker Desktop's CLI completions and ~/.zfunc are both on fpath, but they are
+# declared in ~/.zshenv rather than here. .zprofile is login-only, and a
+# login-only fpath entry makes oh-my-zsh delete and rebuild the compdump on
+# every non-login shell — a tmux pane, or a bare `zsh`. See ~/.zshenv.
 
 # Added by Windsurf
-export PATH="/Users/subhadip/.codeium/windsurf/bin:$PATH"
-
-fpath+=~/.zfunc
+export PATH="$HOME/.codeium/windsurf/bin:$PATH"
 
 # compinit runs once, later, via oh-my-zsh in .zshrc — it picks up everything
-# added to fpath above, so no need to call it here (was running 3x per shell
-# start before this cleanup).
+# added to fpath in ~/.zshenv, so no need to call it here (was running 3x per
+# shell start before this cleanup).
 
 # Added by Antigravity
-export PATH="/Users/subhadip/.antigravity/antigravity/bin:$PATH"
+export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# End of Docker CLI completions
-
-
 # Added by Antigravity CLI installer
-export PATH="/Users/subhadip/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"

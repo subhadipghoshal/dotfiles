@@ -1,0 +1,4 @@
+interface:
+  display_name: "TypeScript Engineering"
+  short_description: "Write safe, maintainable TypeScript code"
+  default_prompt: "Use $typescript-engineering to implement this TypeScript change idiomatically."
