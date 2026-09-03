@@ -20,6 +20,7 @@ that actually earn their keep (the git and kubectl aliases, `lsa`, `md`, the
 10-completion.zsh    completion zstyles + fzf-tab previews + gcloud bashcompinit
 20-git.zsh           wt (worktrees), gctx (repo context)
 30-find.zsh          f, fe, fdir, fcd, s
+35-yazi.zsh          y (yazi, cd-on-quit)
 40-man.zsh           mh, manx, mopt, mans
 50-ai.zsh            agent, ctx, fix, fails, worked, keys
 60-vi.zsh            cursor shapes, text objects, surround, keymap repairs
@@ -60,6 +61,7 @@ before being promoted.
 |---|---|
 | `s <pattern>` | live ripgrep — re-runs on every keystroke, preview scrolls to the hit, Enter opens nvim on that line |
 | `f` / `fe` / `fdir` / `fcd` | fuzzy file/dir pick; `f` prints a path so it composes (`nvim "$(f)"`) |
+| `y [path]` | open yazi; `q` to quit carries the cwd back into this shell, `Q` discards it — disabled in agent shells, see `99-agent-guard.zsh` |
 | `mh <page>` | list a man page's section headers |
 | `manx <page> <SECTION>` | print exactly one section — `manx rsync EXAMPLES` is 32 lines, not 1,300 |
 | `mopt <page> <flag>` | print one flag's paragraph — `mopt tar -z` |

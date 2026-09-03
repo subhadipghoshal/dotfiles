@@ -91,6 +91,12 @@ if (( _zsh_agent_guard )); then
   # Agents should get the real tool, not a wrapper that opens an editor.
   unalias v vim 2>/dev/null
 
+  # yazi (35-yazi.zsh's `y` wrapper) is a full-screen TUI - exactly the class
+  # of thing that hangs a shell no human is watching, same reasoning as the
+  # git/man cases documented above. Unset so it fails fast with "command not
+  # found" instead of blocking until timeout.
+  unset -f y 2>/dev/null
+
 else
 
   # A non-login human shell may inherit pager exports from a former agent

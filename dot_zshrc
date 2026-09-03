@@ -177,3 +177,9 @@ export PATH="$PATH:$HOME/.lmstudio/bin"
 # oh-my-zsh tmux plugin's, because its job is to remove the ones that hang a
 # shell no human is watching. See the file for the reproduced failures.
 source ${ZDOTDIR:-$HOME}/.zsh/99-agent-guard.zsh
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/subhadip.ghoshal/.local/bin:$PATH"
+
+[ -f "/Users/subhadip.ghoshal/.ghcup/env" ] && . "/Users/subhadip.ghoshal/.ghcup/env" # ghcup-env

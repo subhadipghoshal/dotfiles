@@ -108,3 +108,9 @@ if [[ -r "$HOME/.zfunc/_bun_delegate" ]]; then
   autoload -Uz _bun_delegate
   compdef _bun_delegate bun
 fi
+
+# pyenv ships a compctl-based completion (not #compdef-tagged), so it cannot be
+# autoloaded by fpath; it must be sourced after compinit.
+if [[ -r "$(brew --prefix pyenv)/completions/pyenv.zsh" ]]; then
+  . "$(brew --prefix pyenv)/completions/pyenv.zsh"
+fi
