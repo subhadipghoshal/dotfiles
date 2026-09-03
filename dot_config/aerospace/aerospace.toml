@@ -1,0 +1,189 @@
+# Managed by chezmoi: source of truth is
+#   ~/.dotfiles/dot_config/aerospace/aerospace.toml
+# Editing this file directly under ~/.config/aerospace will be reverted by the
+# next `chezmoi apply`.
+#
+# SCOPE: AeroSpace manages GUI application windows only. Terminal/TUI
+# multiplexing belongs to tmux (~/.config/tmux) - the two namespaces are kept
+# disjoint on purpose:
+#     alt-*      -> AeroSpace (GUI windows / workspaces), this file
+#     ctrl-*     -> tmux panes (vim-tmux-navigator)
+#     ctrl-alt-* -> tmux windows (moved off plain alt on 2026-09-03 so
+#                   AeroSpace could own it cleanly - see tmux's CLAUDE.md,
+#                   "Design decisions", for the full rationale)
+#     C-a ...    -> everything else in tmux (prefix table)
+#
+# Kept close to AeroSpace's own shipped default-config.toml on purpose -
+# fighting the idiomatic alt scheme means diverging from every published
+# AeroSpace example you'll ever read. Only additions beyond stock defaults:
+# start-at-login, gaps, workspace-to-monitor-force-assignment, and the
+# on-window-detected float rules below.
+
+config-version = 2
+
+after-startup-command = []
+
+# Start AeroSpace at login.
+start-at-login = true
+
+# Reload manually (`aerospace reload-config` or alt-shift-semicolon, esc)
+# while iterating on this file; flip to true once it's settled.
+auto-reload-config = false
+
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+accordion-padding = 30
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+automatically-unhide-macos-hidden-apps = false
+
+# Only numeric workspaces are bound below (no letter workspaces), so only
+# those need to survive being emptied.
+persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+
+on-mode-changed = []
+
+focus-follows-mouse.enabled = false
+
+key-mapping.preset = 'qwerty'
+
+# Modest breathing room. 0/0/0/0 (AeroSpace's own shipped default) is the
+# fallback if this ever feels too sparse or too padded.
+gaps.inner.horizontal = 8
+gaps.inner.vertical   = 8
+gaps.outer.left       = 8
+gaps.outer.right      = 8
+gaps.outer.top        = 8
+gaps.outer.bottom     = 8
+
+# ---------------------------------------------------------------------------
+# Window rules
+# ---------------------------------------------------------------------------
+# Matched by bundle ID, never window title - AeroSpace's own docs note some
+# apps set their title only after the window appears, making title regexes
+# racy. Bundle IDs confirmed via each app's Info.plist on this machine.
+#
+# AeroSpace already auto-floats windows with no fullscreen button (its own
+# dialog heuristic), excluding terminal apps - so most one-off preference
+# panes and auth popups float without any rule here. These are for apps
+# where that heuristic isn't enough or where tiling actively fights the app.
+#
+# NOTE: this key must stay above any [table] header below it (workspace-to-
+# monitor-force-assignment) - TOML scopes bare keys under the most recent
+# [table] header, so declaring it after would silently nest it inside that
+# table instead of the document root. Confirmed by hitting exactly that
+# parse error on first `aerospace reload-config`.
+on-window-detected = [
+  # System Settings - resizable and tiling-capable, but has no business being
+  # tiled.
+  { if = 'test %{app-bundle-id} = com.apple.systempreferences', run = 'layout floating' },
+
+  # Okta Verify - short-lived push/TOTP auth popups. Tiling these reflows the
+  # whole workspace for a few seconds each time.
+  { if = 'test %{app-bundle-id} = com.okta.mobile', run = 'layout floating' },
+
+  # Zoom - floats entirely, deliberately. It spawns several sibling windows
+  # (meeting canvas, participants, chat, screen-share toolbar/overlay) and
+  # tiling them fights Zoom's own window layout logic.
+  { if = 'test %{app-bundle-id} = us.zoom.xos', run = 'layout floating' },
+
+  # Glean desktop - a Spotlight-style quick-launch overlay, not a document
+  # window.
+  { if = 'test %{app-bundle-id} = com.glean.desktop', run = 'layout floating' },
+
+  # Deliberately left tiled (they tile well): com.microsoft.VSCode,
+  # com.google.Chrome, com.apple.Safari, com.tinyspeck.slackmacgap,
+  # com.mitchellh.ghostty, md.obsidian, com.postmanlabs.mac,
+  # com.anthropic.claudefordesktop, com.google.antigravity, com.apple.finder.
+  #
+  # Chrome PWA wrappers (Docs/Sheets/Slides/Drive/Keep/Gmail/Calendar) all
+  # report as com.google.Chrome, so they can't be targeted separately by
+  # bundle ID - they tile as ordinary Chrome windows.
+]
+
+# ---------------------------------------------------------------------------
+# Workspace -> monitor pinning (laptop + one external, docked setup)
+# ---------------------------------------------------------------------------
+# Monitor names on this machine (`aerospace list-monitors`):
+#   1 | Built-in Retina Display
+#   2 | DELL C3422WE
+#
+# Checked 2026-09-03 via `system_profiler SPDisplaysDataType | grep -i "main
+# display"`: the DELL external is macOS's main display (holds the menu bar)
+# when docked, NOT the laptop panel - so 'main' below means the external and
+# 'secondary' means the laptop, the reverse of the naive guess. Re-check with
+# that same command if you ever change the arrangement in System Settings ->
+# Displays.
+#
+# 'move-workspace-to-monitor' (alt-shift-tab) has NO effect on a
+# force-assigned workspace - that's why 5-7 are deliberately left unpinned,
+# so that binding stays meaningful for ad hoc moves.
+#
+# Graceful when undocked: an absent monitor pattern is just ignored, so the
+# laptop-only case falls back to whatever monitor exists - no separate profile
+# needed.
+[workspace-to-monitor-force-assignment]
+1 = 'main'        # external (DELL C3422WE): editor
+2 = 'main'        # external (DELL C3422WE): browser
+3 = 'main'        # external (DELL C3422WE): comms
+4 = 'main'        # external (DELL C3422WE): spare
+# 5, 6, 7 intentionally unpinned - floaters, movable with alt-shift-tab
+8 = 'secondary'   # laptop panel: reference / notes
+9 = 'secondary'   # laptop panel: chat / monitoring
+
+[mode.main.binding]
+    alt-slash = 'layout tiles horizontal vertical'
+    alt-comma = 'layout accordion horizontal vertical'
+
+    alt-h = 'focus left'
+    alt-j = 'focus down'
+    alt-k = 'focus up'
+    alt-l = 'focus right'
+
+    alt-shift-h = 'move left'
+    alt-shift-j = 'move down'
+    alt-shift-k = 'move up'
+    alt-shift-l = 'move right'
+
+    alt-minus = 'resize smart -50'
+    alt-equal = 'resize smart +50'
+
+    alt-1 = 'workspace 1'
+    alt-2 = 'workspace 2'
+    alt-3 = 'workspace 3'
+    alt-4 = 'workspace 4'
+    alt-5 = 'workspace 5'
+    alt-6 = 'workspace 6'
+    alt-7 = 'workspace 7'
+    alt-8 = 'workspace 8'
+    alt-9 = 'workspace 9'
+
+    alt-shift-1 = 'move-node-to-workspace 1'
+    alt-shift-2 = 'move-node-to-workspace 2'
+    alt-shift-3 = 'move-node-to-workspace 3'
+    alt-shift-4 = 'move-node-to-workspace 4'
+    alt-shift-5 = 'move-node-to-workspace 5'
+    alt-shift-6 = 'move-node-to-workspace 6'
+    alt-shift-7 = 'move-node-to-workspace 7'
+    alt-shift-8 = 'move-node-to-workspace 8'
+    alt-shift-9 = 'move-node-to-workspace 9'
+
+    alt-tab = 'workspace-back-and-forth'
+    alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+
+    alt-shift-semicolon = 'mode service'
+
+[mode.service.binding]
+    esc = ['reload-config', 'mode main']
+    r = ['flatten-workspace-tree', 'mode main']
+    f = ['layout floating tiling', 'mode main']
+    backspace = ['close-all-windows-but-current', 'mode main']
+
+    alt-shift-h = ['join-with left', 'mode main']
+    alt-shift-j = ['join-with down', 'mode main']
+    alt-shift-k = ['join-with up', 'mode main']
+    alt-shift-l = ['join-with right', 'mode main']
