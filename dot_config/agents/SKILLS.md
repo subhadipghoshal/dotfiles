@@ -17,7 +17,7 @@ This is an index, not an instruction layer. Skills are discovered from `~/.confi
 - `defensive-design`: Failure-prone boundaries, persistence, retries, and concurrency.
 - `git-worktree-delegation`: Isolated worktrees for multiple authoring agents.
 - `macos-shell-config`: Safe changes to this Mac's shell, dotfiles, and harness configuration.
-- `principal-code-review`: Independent, severity-gated review of code changes.
+- `adversarial-review`: Independent, severity-gated review of code changes.
 
 ## Effort ladder
 

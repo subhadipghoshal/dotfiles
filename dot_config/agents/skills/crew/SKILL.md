@@ -81,10 +81,9 @@ base ref, repo path, applicable repo instructions — never builder or QA report
 coverage manifest, never suspected defects. In human-in-loop, close every remaining crew pane
 first, then run `TaskList` and confirm no entry names a defect, a suspicion, or a file (see the
 coarse-board rule below) before dispatching.
-**Gate 4:** apply the `principal-code-review` severity gate — `low` doesn't block, `medium` goes
-back for a fix, `high`/`critical` stop for human disposition. In human-in-loop `medium` is yours
-to call too. Fix loop bounded at 2 rounds, fresh in-place builder each time, re-review every
-round.
+**Gate 4:** apply the `adversarial-review` gate table. In priority order: multi-type findings go to human disposition and are logged; security findings (any severity) go to human disposition; documentation findings (any severity) go to agent fix; high/critical go to human disposition; medium with layer=design goes to human disposition; medium with confidence=suspected does not block; remaining medium go to agent fix; low does not block. In human-in-loop, medium is yours to call. Fix loop bounded at 2 rounds, fresh in-place builder each time, re-review every round.
+
+For each multi-type finding (rule 1), before routing for human disposition: append an entry to `~/.local/state/agents/adversarial-review/multi-type-findings.md`, creating the file and its directory if absent. Entry format: `<date> | <task-slug> | <finding title> | types: <comma-list> | <one-line reason single-type classification was insufficient>`.
 
 **Teardown (human-in-loop).** Close the reviewer pane and delete the team as each phase's
 teammates go idle (`TeammateIdle` is the signal — act on it rather than polling).

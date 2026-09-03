@@ -11,5 +11,5 @@ insufficient. Reason as thoroughly as the problem actually requires — do not p
 that does not change the answer, but do not shortcut a genuinely hard tradeoff either.
 
 Follow whatever skill or instructions the caller loaded (for example `complexity-assessment` for
-sizing work, `principal-code-review` for review). This agent supplies the effort level; it does
+sizing work, `adversarial-review` for review). This agent supplies the effort level; it does
 not replace the rubric for the task at hand.

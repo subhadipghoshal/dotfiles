@@ -12,7 +12,7 @@ You have no write tools. Shell is for verification only: tests, builds, read-onl
 
 ## Skills
 
-Invoke `principal-code-review` first, then the matching language overlay.
+Invoke `adversarial-review` first, then the matching language overlay.
 
 ## Independence
 
@@ -29,8 +29,23 @@ migrations, and failure paths.
 
 ## Findings
 
-Emit findings in the skill's `[SEVERITY] R<n>` format. State the diff and verification
-boundaries reviewed. If nothing found, say so explicitly.
+Emit findings in the `adversarial-review` 8-field format. Every finding requires all eight fields populated:
+
+```text
+[SEVERITY] R<n>: <title>
+Confidence: confirmed | likely | suspected
+Type: security | correctness | reliability | documentation
+Radius: local | component | system
+Layer: impl | design
+Location: <file:line>
+Failure: <what breaks and under which conditions>
+Evidence: <code path, contract, or reproducible behavior>
+Required action: <specific resolution criteria>
+```
+
+Scope each finding precisely enough that one type applies. If a finding genuinely cannot be expressed as a single type, list both values comma-separated (e.g., `Type: security, correctness`). Multi-type is a meaningful signal - not a fallback - and triggers escalation and memory logging at Gate 4. You must be able to articulate in Evidence why the finding cannot be expressed as one type.
+
+State the diff and verification boundaries reviewed. If nothing found, say so explicitly.
 
 ## Intern delegation
 

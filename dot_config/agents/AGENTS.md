@@ -32,7 +32,7 @@ Applies to every task unless higher-priority or closer instructions override it.
 
 - Classify work before acting: low for docs, explanation, initialization, or an isolated reversible edit; medium for runtime changes within one component; high for auth, security, persisted data, migrations, public contracts, concurrency, external side effects, cross-component changes, broad refactors, or uncertain rollback.
 - Low-risk work stays local. Delegate medium or high work only when two or more independent workstreams materially reduce context or elapsed time. Use `$git-worktree-delegation` only when multiple writers need isolation.
-- Use `$principal-code-review` for high-risk code changes. Treat medium or higher findings as blockers; high or critical findings require human disposition.
+- Use `$adversarial-review` for high-risk code changes. Apply the skill's gate table: security findings always require human disposition; documentation findings always go to agent fix; multi-type findings escalate and are logged; other outcomes vary by severity, layer, and confidence.
 - A `/crew` workflow exists for medium and high risk work: a role-separated crew (triage, plan, build, verify, review). It is user-invoked; suggest it when it fits, but never enter it unasked.
 - `/init` is a lightweight exception: inspect structure, manifests, commands, tests, docs, and recent commits; do not delegate or run builds, tests, or linters unless requested.
 - The primary agent owns integration, conflict resolution, verification, and the final response.
