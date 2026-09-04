@@ -21,3 +21,6 @@ vim.cmd([[
 -- stop flagging the halves of camelCase identifiers as misspellings.
 vim.opt.spellfile = vim.fn.stdpath("config") .. "/spell/en.utf-8.add"
 vim.opt.spelloptions:append("camel")
+
+-- Terminal window title emission (complements tmux allow-rename on)
+require("config.tmuxconf")
