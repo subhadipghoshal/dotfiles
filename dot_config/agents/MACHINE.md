@@ -6,9 +6,18 @@ Last verified 2026-08-29. Read this file when work depends on this machine’s c
 
 - The host runs macOS 26.6.2 on Apple Silicon (`arm64`). The default shell is `/bin/zsh`.
 - Homebrew is installed at `/opt/homebrew/bin/brew`; do not assume Intel Homebrew paths under `/usr/local`.
-- The local timezone is Asia/Kolkata (IST). The home directory is `/Users/subhadip`.
+- The local timezone is Asia/Kolkata (IST). The home directory is `$HOME`.
 - `XDG_CONFIG_HOME` is currently unset, so the XDG default is `~/.config`. Agent configuration therefore lives under `~/.config/agents`.
 - Use explicit, validated absolute paths for destructive operations. Never use the home directory, `/`, or a workspace root as a recursive target.
+
+## Keyboard and terminal constraints
+
+- macOS claims `C-Space` system-wide for input-source switching. The keystroke never reaches the terminal, so it is unusable as a terminal or tmux binding.
+- AeroSpace (`~/.config/aerospace/aerospace.toml`, chezmoi `dot_config/aerospace`) claims `alt-1`..`alt-9` and `alt-h/j/k/l` as OS-level hotkeys. An OS-level grab cannot be won back by any terminal-side config.
+- Namespace contract: `alt-*` = AeroSpace GUI windows, `ctrl-*` = tmux panes, `ctrl-alt-*` = tmux windows, `C-a` = tmux prefix.
+- Ghostty forwards plain Option as Meta only when the Option chord produces no printable character (`macos-option-as-alt`, default `true` on U.S. Standard). An Option chord that **also holds Ctrl** is treated as Alt regardless of that setting, so `C-M-<key>` survives a layout change, a `macos-option-as-alt` flip, or a different terminal. Prefer it for durable bindings.
+- Accepted cost: `opt-h/j/k/l` and `opt-<digit>` no longer emit Option glyphs. Accented dead keys (`opt-e`, `opt-i`) are unaffected.
+- Ghostty's Kitty graphics protocol requires tmux `allow-passthrough on` to reach Neovim (`snacks.image` inline images and mermaid). Without it tmux silently swallows the escape sequences.
 
 ## Configuration ownership and precedence
 
@@ -22,12 +31,12 @@ Last verified 2026-08-29. Read this file when work depends on this machine’s c
 
 The canonical skill root is `~/.config/agents/skills`. `~/.agents` is a compatibility symlink to `~/.config/agents`, retained for tools that conventionally discover `~/.agents/skills` or store `.skill-lock.json` there. Do not create a second real skill tree under the compatibility path.
 
-Chezmoi-managed personal skills live in `~/.local/share/chezmoi/dot_config/agents/skills`. Upstream-installed packages are tracked by `~/.config/agents/.skill-lock.json`; keep complete skill packages together, including `SKILL.md`, scripts, references, metadata, and agent manifests. Do not vendor upstream packages into the public dotfiles source unless that is an explicit choice.
+Chezmoi-managed personal skills live in `~/.local/share/chezmoi/dot_config/agents/skills`. If upstream packages are installed, they are tracked by `~/.config/agents/.skill-lock.json` (absent until the first one is installed); keep complete skill packages together, including `SKILL.md`, scripts, references, metadata, and agent manifests. Do not vendor upstream packages into the public dotfiles source unless that is an explicit choice.
 
 | Harness | Personal skill discovery |
 |---|---|
 | Codex | Discovers `~/.agents/skills` through the compatibility symlink |
-| OpenCode | Its local plugin registers the XDG skill root |
+| OpenCode | Per-skill **absolute** symlinks under `~/.config/opencode/skills/` (every other harness uses relative ones). That tree is **not** chezmoi-managed — a fresh checkout loses all of them; recreate by hand |
 | Claude Code | Per-skill links under `~/.claude/skills` |
 | Gemini / Antigravity | Per-skill links under `~/.gemini/config/skills` |
 | Cursor | Per-skill links under `~/.cursor/skills` |

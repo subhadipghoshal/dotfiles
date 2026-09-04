@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tmux Config Debugging"
+  short_description: "Verify tmux config changes against silent-failure modes"
+  default_prompt: "Use $tmux-config-debugging when debugging tmux bindings, format strings, or plugins."

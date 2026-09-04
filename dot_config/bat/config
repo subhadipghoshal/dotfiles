@@ -2,7 +2,8 @@
 # dark falls back to the default theme. Retheming ghostty rethemes bat with no
 # config edit. Man pages override this to Monokai in 85-bat-extras.zsh.
 --theme=auto:system
---theme-dark=default
+--theme-dark=Catppuccin Mocha
+--theme-light=Catppuccin Latte
 
 # Decorations. bat's default set, stated explicitly so it survives any
 # BAT_STYLE that turns up in the environment. Note batman exports BAT_STYLE=grid

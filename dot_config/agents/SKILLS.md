@@ -18,6 +18,7 @@ This is an index, not an instruction layer. Skills are discovered from `~/.confi
 - `git-worktree-delegation`: Isolated worktrees for multiple authoring agents.
 - `macos-shell-config`: Safe changes to this Mac's shell, dotfiles, and harness configuration.
 - `adversarial-review`: Independent, severity-gated review of code changes.
+- `tmux-config-debugging`: Verification techniques for tmux bindings, format strings, and plugin load order.
 
 ## Effort ladder
 
