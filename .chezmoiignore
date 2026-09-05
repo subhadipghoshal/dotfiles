@@ -3,3 +3,7 @@ README.md
 
 # Private git identity — never in the public dotfiles repo.
 .gitconfig.local
+
+# Claude env (API key, base URL, telemetry) — deliberately OUTSIDE chezmoi so a
+# chezmoi apply can never override it. Sourced from ~/.zshenv.
+.claude/env

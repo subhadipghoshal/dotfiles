@@ -1,5 +1,8 @@
 {
-  "model": "opus",
+  "permissions": {
+    "defaultMode": "plan"
+  },
+  "model": "sonnet",
   "hooks": {
     "SessionStart": [
       {
@@ -15,7 +18,9 @@
       }
     ]
   },
-  "enableWorkflows": true,
+  "worktree": {
+    "baseRef": "fresh"
+  },
   "statusLine": {
     "type": "command",
     "command": "bash \"$HOME/.claude/statusline-command.sh\""
@@ -41,7 +46,14 @@
     "skill-creator@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true,
     "atomic-agents@claude-plugins-official": true,
-    "i-have-adhd@i-have-adhd": true
+    "i-have-adhd@i-have-adhd": true,
+    "code-review@claude-plugins-official": true,
+    "atlassian@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "commit-commands@claude-plugins-official": true,
+    "postman@claude-plugins-official": true,
+    "ralph-loop@claude-plugins-official": true,
+    "azure@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "i-have-adhd": {
@@ -53,46 +65,61 @@
     "hiroppy": {
       "source": {
         "source": "directory",
-        "path": "/Users/subhadip/.config/tmux/plugins/tmux-agent-sidebar"
+        "path": "/Users/subhadip.ghoshal/.config/tmux/plugins/tmux-agent-sidebar"
       }
     }
   },
   "sandbox": {
     "enabled": true
   },
+  "feedbackDrafts": "quiet",
   "effortLevel": "medium",
+  "modelSettings": {
+    "claude-sonnet-4-6": {
+      "effortLevel": "medium"
+    },
+    "claude-sonnet-latest": {
+      "effortLevel": "xhigh"
+    }
+  },
   "voice": {
     "enabled": true,
     "mode": "hold"
   },
   "theme": "auto",
+  "editorMode": "vim",
+  "autoCompactEnabled": true,
+  "switchModelsOnFlag": true,
+  "autoContinueAtUsageLimit": true,
+  "fileCheckpointingEnabled": true,
   "teammateMode": "tmux",
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true,
+  "useAutoModeDuringPlan": true,
   "autoMode": {
     "environment": [
       "### Org-wide",
       "**Organization**: None configured",
       "**Cloud provider(s)**: None configured",
       "**Repository visibility**: Not queryable here (no remotes on this repo); assume private per shipped default",
-      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Internal sharing / snippet hosting**: None configured \u2014 treat public paste/gist services as outside the trust boundary",
       "**Secrets management**: None configured",
       "**Default / protected branches**: Not queryable (no remotes; org/repo not derivable)",
       "**CI/CD deploy targets**: None configured",
       "**Network posture**: None configured",
-      "**Source control**: The trusted repo only — no remotes configured",
+      "**Source control**: The trusted repo only \u2014 no remotes configured",
       "**Trusted internal domains**: None configured",
       "**Trusted cloud buckets**: None configured",
       "**Key internal services**: None configured",
       "**Internal package registry**: None configured",
       "**Sensitive data locations & audiences**: any file or store holding personal data, confidential business data, credentials, regulated data, or similarly sensitive material; preserve exact handles when known and share only with audiences cleared at the [named+specifics] bar",
       "**Data retention / declassification**: None configured",
-      "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment (hyphen/underscore/dot-delimited — e.g. matches `prod-db`, not `producer`)",
-      "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic",
+      "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment (hyphen/underscore/dot-delimited \u2014 e.g. matches `prod-db`, not `producer`)",
+      "**Protected deployment namespaces / environments**: None configured \u2014 fall back to the Sensitive remote targets heuristic",
       "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment",
       "### User-specific",
-      "**Primary use of Claude Code**: software development (personal/hobby-leaning — dotfiles, tmux config, developer tooling)",
-      "**Trusted repo**: /Users/subhadip/.config/tmux-scratch (no remotes configured; local-only staged rebuild of ~/.config/tmux)",
+      "**Primary use of Claude Code**: software development (personal/hobby-leaning \u2014 dotfiles, tmux config, developer tooling)",
+      "**Trusted repo**: /Users/subhadip.ghoshal/.config/tmux-scratch (no remotes configured; local-only staged rebuild of ~/.config/tmux)",
       "**Org-specific CLIs**: None configured"
     ]
   },

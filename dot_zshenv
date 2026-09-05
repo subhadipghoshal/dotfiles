@@ -67,3 +67,8 @@ fpath=(
 )
 
 . "$HOME/.cargo/env"
+
+# Claude env (API key, base URL, telemetry) lives OUTSIDE chezmoi in
+# ~/.claude/env. Read by every zsh before claude launches; the file itself is
+# ignore-listed in chezmoi so a chezmoi apply can never override its secrets.
+[[ -r "$HOME/.claude/env" ]] && source "$HOME/.claude/env"
