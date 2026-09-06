@@ -1,0 +1,23 @@
+
+# Global hotkey for a floating drop-down terminal, reachable from any macOS
+# app - the closest thing to a system-wide "quick-launch yazi" this version
+# of Ghostty (1.3.1) can do. There is no per-surface `command` override for
+# the quick terminal specifically (`command`/`initial-command` apply to every
+# new surface, quick terminal included), so this drops you at a normal shell
+# prompt - type `y` (~/.zsh/35-yazi.zsh) once it's up.
+#
+# cmd+opt+y, not opt+space: this machine's tmux config
+# (~/.config/tmux/conf/bindings.conf) binds Alt+1-9/h/l as Meta for window
+# switching, so Option has to keep reaching the terminal as Alt/Meta. A
+# `global:` bind grabs the combo in every app before any of that ever sees
+# it, so anything Option+Space-shaped is off the table here. cmd+opt+y also
+# collides with nothing in Ghostty's own defaults (checked via
+# `ghostty +show-config --default`) or any macOS system shortcut.
+#
+# `global:` needs Accessibility permission - System Settings > Privacy &
+# Security > Accessibility - macOS prompts for it the first time this loads.
+keybind = global:cmd+alt+y=toggle_quick_terminal
+
+quick-terminal-position = center
+quick-terminal-size = 80%,80%
+# quick-terminal-autohide is already true by default on macOS - not repeated here
