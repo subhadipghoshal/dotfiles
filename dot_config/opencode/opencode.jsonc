@@ -1,6 +1,34 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "lsp": true,
+  "model": "anthropic/ds-dynamic",
+  "provider": {
+    "anthropic": {
+      "options": {
+        "apiKey": "{env:ANTHROPIC_AUTH_TOKEN}",
+        "baseURL": "https://llm-hub.docusignhq.com/v1",
+      },
+      "models": {
+        "ds-dynamic": {
+          "name": "Dynamic Routing (DocuSign)",
+          "cost": {
+            "input": 0,
+            "output": 0,
+          },
+          "limit": {
+            "context": 200000,
+            "output": 4096,
+          },
+          "status": "active",
+          "tool_call": true,
+        },
+      },
+    },
+  },
+  "agent": {
+    "plan": { "model": "anthropic/claude-opus-5" },
+    "build": { "model": "anthropic/claude-sonnet-5" },
+  },
   "instructions": [
     "https://raw.githubusercontent.com/JRedeker/opencode-shell-strategy/trunk/shell_strategy.md",
   ],
@@ -8,14 +36,15 @@
     "opencode-openai-codex-auth",
     "opencode-vibeguard",
     "opencode-antigravity-auth",
+    "opencode-gemini-auth@latest",
     "opencode-model-router",
+    "opencode-anthropic-fix",
     "@tarquinen/opencode-dcp",
     "opencode-pty",
     "@plannotator/opencode",
     "opencode-goal-plugin",
     "@zenobius/opencode-skillful",
     "opencode-websearch-cited",
-    "openqueue",
     "opencode-supermemory",
     "opencode-notify",
   ],
