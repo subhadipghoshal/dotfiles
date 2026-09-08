@@ -72,3 +72,9 @@ fpath=(
 # ~/.claude/env. Read by every zsh before claude launches; the file itself is
 # ignore-listed in chezmoi so a chezmoi apply can never override its secrets.
 [[ -r "$HOME/.claude/env" ]] && source "$HOME/.claude/env"
+
+# OpenCode default model selection lives OUTSIDE chezmoi in
+# ~/.config/opencode/env. Read by every zsh before opencode launches; the file
+# is ignore-listed in chezmoi so a chezmoi apply can never override a machine's
+# own choice of defaults. Resolves the {env:...} refs in opencode.jsonc.
+[[ -r "$HOME/.config/opencode/env" ]] && source "$HOME/.config/opencode/env"
