@@ -23,6 +23,11 @@ alias lsa='eza --icons=always -lah'
 # runs (lib/cli.zsh) and forces a full rebuild.
 alias omzr='exec zsh'
 
+# Agent harnesses
+
+alias cl=claude
+alias oc=opencode
+
 safe_clean() {
   # This function had TWO bugs, either of which broke the shell permanently.
   #

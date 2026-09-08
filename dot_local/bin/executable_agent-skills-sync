@@ -1,0 +1,142 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+config_home="${XDG_CONFIG_HOME:-$HOME/.config}"
+claude_dir="${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
+store="$config_home/agents/skills"
+chezmoi_source="${CHEZMOI_SOURCE_DIR:-$HOME/.local/share/chezmoi}"
+targets_file="$chezmoi_source/dot_config/agents/fanout.conf"
+
+dry_run=0
+prune_only=0
+case "${1:-}" in
+  --dry-run) dry_run=1 ;;
+  --prune-only) prune_only=1 ;;
+  "") ;;
+  *) printf 'usage: %s [--dry-run|--prune-only]\n' "$0" >&2; exit 2 ;;
+esac
+
+if [[ ! -d "$store" ]]; then
+  printf 'skill store does not exist: %s\n' "$store" >&2
+  exit 1
+fi
+if [[ ! -f "$targets_file" ]]; then
+  printf 'fanout target list does not exist: %s\n' "$targets_file" >&2
+  exit 1
+fi
+
+home_relative() {
+  local path="$1"
+  if [[ "$path" == "$HOME/"* ]]; then
+    printf '%s' "${path#"$HOME/"}"
+  else
+    printf ''
+  fi
+}
+
+relative_store_target() {
+  local target="$1" skill="$2" target_rel config_rel prefix=""
+  if [[ "$target" == "$config_home/opencode/"* ]]; then
+    printf '%s/%s' "$store" "$skill"
+    return
+  fi
+  if [[ "$claude_dir" != "$HOME/.claude" && "$target" == "$claude_dir/"* ]]; then
+    printf '%s/%s' "$store" "$skill"
+    return
+  fi
+  target_rel=$(home_relative "$target")
+  config_rel=$(home_relative "$config_home")
+  if [[ -z "$target_rel" || -z "$config_rel" ]]; then
+    printf '%s/agents/skills/%s' "$store" "$skill"
+    return
+  fi
+  while [[ "$target_rel" == */* ]]; do
+    prefix="../$prefix"
+    target_rel="${target_rel#*/}"
+  done
+  prefix="../$prefix"
+  printf '%s%s/agents/skills/%s' "$prefix" "$config_rel" "$skill"
+}
+
+relative_store_prefix() {
+  local target="$1" root="$2" target_rel root_rel prefix=""
+  target_rel=$(home_relative "$target")
+  root_rel=$(home_relative "$root")
+  [[ -n "$target_rel" && -n "$root_rel" ]] || return 1
+  while [[ "$target_rel" == */* ]]; do
+    prefix="../$prefix"
+    target_rel="${target_rel#*/}"
+  done
+  printf '%s%s/' "$prefix" "$root_rel"
+}
+
+is_store_link() {
+  local link="$1" target resolved prefix compat_prefix
+  target=$(readlink "$link")
+  [[ "$target" == "$store/"* ]] && return 0
+  prefix=$(relative_store_prefix "$(dirname "$link")" "$store" || true)
+  [[ -n "$prefix" && "$target" == "$prefix"* ]] && return 0
+  compat_prefix=$(relative_store_prefix "$(dirname "$link")" "$HOME/.agents/skills" || true)
+  [[ -n "$compat_prefix" && "$target" == "$compat_prefix"* ]] && return 0
+  if [[ -e "$link" ]]; then
+    resolved=$(realpath "$link" 2>/dev/null || true)
+    [[ "$resolved" == "$store/"* ]]
+  fi
+}
+
+action() {
+  local description="$1"; shift
+  if (( dry_run )); then
+    printf 'DRY-RUN %s\n' "$description"
+  else
+    "$@"
+    printf '%s\n' "$description"
+  fi
+}
+
+while IFS= read -r target_rel || [[ -n "$target_rel" ]]; do
+  [[ -z "$target_rel" || "$target_rel" == \#* ]] && continue
+  if [[ "$target_rel" == ".claude/"* ]]; then
+    target="$claude_dir/${target_rel#".claude/"}"
+  elif [[ "$target_rel" == ".config/"* ]]; then
+    target="$config_home/${target_rel#".config/"}"
+  else
+    target="$HOME/$target_rel"
+  fi
+  [[ -d "$(dirname "$target")" ]] || continue
+  [[ -d "$target" ]] || {
+    printf 'skip missing target directory %s\n' "$target"
+    continue
+  }
+
+  while IFS= read -r link; do
+    [[ -n "$link" && -L "$link" ]] || continue
+    [[ -e "$link" ]] && continue
+    is_store_link "$link" || continue
+    action "remove stale store link $link" rm "$link"
+  done < <(find "$target" -maxdepth 1 -type l -print 2>/dev/null)
+
+  (( prune_only )) && continue
+
+  while IFS= read -r skill_dir; do
+    skill=$(basename "$skill_dir")
+    link="$target/$skill"
+    link_target=$(relative_store_target "$target" "$skill")
+    if [[ -L "$link" && "$(readlink "$link")" == "$link_target" ]]; then
+      continue
+    fi
+    if [[ -d "$link" && ! -L "$link" ]]; then
+      printf 'skip real skill directory %s\n' "$link"
+      continue
+    fi
+    if [[ -e "$link" || -L "$link" ]]; then
+      if is_store_link "$link"; then
+        action "replace store link $link -> $link_target" sh -c 'rm "$1" && ln -s "$2" "$1"' sh "$link" "$link_target"
+      else
+        printf 'skip unrelated path %s\n' "$link"
+      fi
+      continue
+    fi
+    action "create $link -> $link_target" ln -s "$link_target" "$link"
+  done < <(find -L "$store" -mindepth 2 -maxdepth 2 -type f -name SKILL.md -exec dirname {} \; | sort)
+done < "$targets_file"

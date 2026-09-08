@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# fanout.conf hash: {{ include "dot_config/agents/fanout.conf" | sha256sum }}
+# skill directory listing hash: {{ glob (joinPath .chezmoi.sourceDir "dot_config/agents/skills/*/SKILL.md") | join "\n" | sha256sum }}
+set -euo pipefail
+
+"$HOME/.local/bin/agent-skills-sync"

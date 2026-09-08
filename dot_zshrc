@@ -183,3 +183,9 @@ source ${ZDOTDIR:-$HOME}/.zsh/99-agent-guard.zsh
 export PATH="/Users/subhadip.ghoshal/.local/bin:$PATH"
 
 [ -f "/Users/subhadip.ghoshal/.ghcup/env" ] && . "/Users/subhadip.ghoshal/.ghcup/env" # ghcup-env
+
+# >>> pi-completion >>>
+fpath=("/opt/homebrew/share/zsh/site-functions" $fpath)
+export PI_COMPLETION_VERSION="0.84.2"
+autoload -Uz compinit && compinit
+# <<< pi-completion <<<

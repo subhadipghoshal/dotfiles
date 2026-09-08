@@ -51,13 +51,20 @@
     "commit-commands@claude-plugins-official": true,
     "postman@claude-plugins-official": true,
     "ralph-loop@claude-plugins-official": true,
-    "azure@claude-plugins-official": true
+    "azure@claude-plugins-official": true,
+    "superpowers@superpowers-marketplace": true
   },
   "extraKnownMarketplaces": {
     "hiroppy": {
       "source": {
         "source": "directory",
         "path": "/Users/subhadip.ghoshal/.config/tmux/plugins/tmux-agent-sidebar"
+      }
+    },
+    "superpowers-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "obra/superpowers-marketplace"
       }
     }
   },

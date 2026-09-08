@@ -114,3 +114,9 @@ fi
 if [[ -r "$(brew --prefix pyenv)/completions/pyenv.zsh" ]]; then
   . "$(brew --prefix pyenv)/completions/pyenv.zsh"
 fi
+
+# Zsh completions
+fpath=(/Users/subhadip.ghoshal/.zsh/completions $fpath)
+autoload -Uz compinit && compinit
+
+
